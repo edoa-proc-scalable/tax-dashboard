@@ -2640,6 +2640,280 @@ const SAMPLE_INPUT_CASE_415 = `{
   ]
 }`;
 
+const SAMPLE_INPUT_CASE_511 = `{
+  "clientData": {
+    "countryOfTaxResidency": "IT",
+    "accountGroupId": "IT000051",
+    "taxRegime": "AMMINISTRATO"
+  },
+  "clientInitialState": {
+    "year": 2024,
+    "lossPots": {}
+  },
+  "events": [
+    {
+      "triggerReference": "1",
+      "isin": "IT0003132476",
+      "eventType": "INSTRUMENT_BUY",
+      "quantity": 100,
+      "unitPrice": 110.0,
+      "accountGroupId": "IT000051",
+      "fee": 0,
+      "transactionTimestamp": "2024-04-01T03:00:00+00:00",
+      "valueDate": "2024-04-01"
+    },
+    {
+      "triggerReference": "2",
+      "isin": "IT0003132476",
+      "eventType": "INSTRUMENT_SELL",
+      "quantity": 100,
+      "unitPrice": 100.0,
+      "accountGroupId": "IT000051",
+      "fee": 0,
+      "transactionTimestamp": "2024-04-02T03:00:00+00:00",
+      "valueDate": "2024-04-02"
+    },
+    {
+      "triggerReference": "3",
+      "isin": "IE00B1W57M07",
+      "eventType": "INSTRUMENT_BUY",
+      "quantity": 100,
+      "unitPrice": 50.0,
+      "accountGroupId": "IT000051",
+      "fee": 0,
+      "transactionTimestamp": "2025-02-10T03:00:00+00:00",
+      "valueDate": "2025-02-10"
+    },
+    {
+      "triggerReference": "4",
+      "isin": "IE00B1W57M07",
+      "eventType": "INSTRUMENT_SELL",
+      "quantity": 100,
+      "unitPrice": 60.0,
+      "accountGroupId": "IT000051",
+      "fee": 0,
+      "transactionTimestamp": "2025-06-15T03:00:00+00:00",
+      "valueDate": "2025-06-15"
+    }
+  ],
+  "securityMasterData": [
+    {
+      "isin": "IT0003132476",
+      "bankAssetType": "SHR",
+      "productType": "ORDINARY_SHARES",
+      "invFundUCITS": "NO",
+      "issuerGroup": "COMPANIES_AND_PRIVATE_INDIVIDUALS",
+      "countryOfOrigin": "IT",
+      "fttRelevance": "YES"
+    },
+    {
+      "isin": "IE00B1W57M07",
+      "bankAssetType": "ETF",
+      "productType": "INDEX_FUNDS",
+      "invFundUCITS": "YES",
+      "issuerGroup": "COMPANIES_AND_PRIVATE_INDIVIDUALS",
+      "countryOfOrigin": "IE",
+      "fttRelevance": "NONE"
+    }
+  ]
+}`;
+
+const SAMPLE_INPUT_CASE_512 = `{
+  "clientData": {
+    "countryOfTaxResidency": "IT",
+    "accountGroupId": "IT000052",
+    "taxRegime": "AMMINISTRATO"
+  },
+  "clientInitialState": {
+    "year": 2024,
+    "lossPots": {}
+  },
+  "events": [
+    {
+      "triggerReference": "1",
+      "isin": "IE00B14X4Q57",
+      "eventType": "INSTRUMENT_BUY",
+      "quantity": 10,
+      "unitPrice": 100.0,
+      "accountGroupId": "IT000052",
+      "fee": 0,
+      "transactionTimestamp": "2025-01-15T03:00:00+00:00",
+      "valueDate": "2025-01-15"
+    },
+    {
+      "triggerReference": "2",
+      "isin": "IE00B14X4Q57",
+      "eventType": "INSTRUMENT_SELL",
+      "quantity": 10,
+      "unitPrice": 90.0,
+      "accountGroupId": "IT000052",
+      "fee": 0,
+      "transactionTimestamp": "2025-08-20T03:00:00+00:00",
+      "valueDate": "2025-08-20"
+    }
+  ],
+  "securityMasterData": [
+    {
+      "isin": "IE00B14X4Q57",
+      "bankAssetType": "ETF",
+      "productType": "INDEX_FUNDS",
+      "invFundUCITS": "YES",
+      "issuerGroup": "COMPANIES_AND_PRIVATE_INDIVIDUALS",
+      "countryOfOrigin": "IE",
+      "fttRelevance": "NONE"
+    }
+  ],
+  "fundTaxData": [
+    {
+      "isin": "IE00B14X4Q57",
+      "validFrom": "2025-01-01",
+      "validTo": "2025-12-31",
+      "irrp": 1.0
+    }
+  ]
+}`;
+
+const SAMPLE_INPUT_CASE_513 = `{
+  "clientData": {
+    "countryOfTaxResidency": "IT",
+    "accountGroupId": "IT000053",
+    "taxRegime": "AMMINISTRATO"
+  },
+  "clientInitialState": {
+    "year": 2024,
+    "lossPots": {}
+  },
+  "events": [
+    {
+      "triggerReference": "1",
+      "isin": "IE00BMVB5L14",
+      "eventType": "INSTRUMENT_BUY",
+      "quantity": 1000,
+      "unitPrice": 25.0,
+      "accountGroupId": "IT000053",
+      "fee": 0,
+      "transactionTimestamp": "2025-08-01T03:00:00+00:00",
+      "valueDate": "2025-08-01"
+    },
+    {
+      "triggerReference": "2",
+      "isin": "IE00BMVB5L14",
+      "eventType": "INSTRUMENT_SELL",
+      "quantity": 1000,
+      "unitPrice": 24.0,
+      "accountGroupId": "IT000053",
+      "fee": 0,
+      "transactionTimestamp": "2025-09-10T03:00:00+00:00",
+      "valueDate": "2025-09-10"
+    }
+  ],
+  "securityMasterData": [
+    {
+      "isin": "IE00BMVB5L14",
+      "bankAssetType": "ETF",
+      "productType": "INDEX_FUNDS",
+      "invFundUCITS": "YES",
+      "issuerGroup": "COMPANIES_AND_PRIVATE_INDIVIDUALS",
+      "countryOfOrigin": "IE",
+      "fttRelevance": "NONE"
+    }
+  ],
+  "fundTaxData": [
+    {
+      "isin": "IE00BMVB5L14",
+      "validFrom": "2025-07-01",
+      "validTo": "2025-12-31",
+      "irrp": 0.481
+    }
+  ]
+}`;
+
+const SAMPLE_INPUT_CASE_514 = `{
+  "clientData": {
+    "countryOfTaxResidency": "IT",
+    "accountGroupId": "IT000054",
+    "taxRegime": "AMMINISTRATO"
+  },
+  "clientInitialState": {
+    "year": 2024,
+    "lossPots": {}
+  },
+  "events": [
+    {
+      "triggerReference": "1",
+      "isin": "IT0003132476",
+      "eventType": "INSTRUMENT_BUY",
+      "quantity": 10,
+      "unitPrice": 220.0,
+      "accountGroupId": "IT000054",
+      "fee": 0,
+      "transactionTimestamp": "2024-04-01T03:00:00+00:00",
+      "valueDate": "2024-04-01"
+    },
+    {
+      "triggerReference": "2",
+      "isin": "IT0003132476",
+      "eventType": "INSTRUMENT_SELL",
+      "quantity": 10,
+      "unitPrice": 20.0,
+      "accountGroupId": "IT000054",
+      "fee": 0,
+      "transactionTimestamp": "2024-04-02T03:00:00+00:00",
+      "valueDate": "2024-04-02"
+    },
+    {
+      "triggerReference": "3",
+      "isin": "IE00BMVB5M21",
+      "eventType": "INSTRUMENT_BUY",
+      "quantity": 10,
+      "unitPrice": 50.0,
+      "accountGroupId": "IT000054",
+      "fee": 0,
+      "transactionTimestamp": "2025-01-17T03:00:00+00:00",
+      "valueDate": "2025-01-17"
+    },
+    {
+      "triggerReference": "4",
+      "isin": "IE00BMVB5M21",
+      "eventType": "INSTRUMENT_SELL",
+      "quantity": 10,
+      "unitPrice": 100.0,
+      "accountGroupId": "IT000054",
+      "fee": 0,
+      "transactionTimestamp": "2025-03-12T03:00:00+00:00",
+      "valueDate": "2025-03-12"
+    }
+  ],
+  "securityMasterData": [
+    {
+      "isin": "IT0003132476",
+      "bankAssetType": "SHR",
+      "productType": "ORDINARY_SHARES",
+      "invFundUCITS": "NO",
+      "issuerGroup": "COMPANIES_AND_PRIVATE_INDIVIDUALS",
+      "countryOfOrigin": "IT",
+      "fttRelevance": "YES"
+    },
+    {
+      "isin": "IE00BMVB5M21",
+      "bankAssetType": "ETF",
+      "productType": "INDEX_FUNDS",
+      "invFundUCITS": "YES",
+      "issuerGroup": "COMPANIES_AND_PRIVATE_INDIVIDUALS",
+      "countryOfOrigin": "IE",
+      "fttRelevance": "NONE"
+    }
+  ],
+  "fundTaxData": [
+    {
+      "isin": "IE00BMVB5M21",
+      "validFrom": "2025-01-01",
+      "validTo": "2025-06-30",
+      "irrp": 0.4
+    }
+  ]
+}`;
+
 
 const STANDARD_TAX_RATE = 0.26;
 const FFTT_RATE = 0.004;
@@ -2890,6 +3164,30 @@ const CASES = {
     description: "Return of capital distribution reduces open amount, no tax.",
     tags: ["DICHIARATIVO", "Return of capital", "ETF UCITS"],
     sample: SAMPLE_INPUT_CASE_415,
+  },
+  "scope5-case511": {
+    label: "Scope 5 - Case 5.1.1",
+    description: "ETF gain is capital income and does not offset a prior loss pot.",
+    tags: ["AMMINISTRATO", "ETF UCITS", "Loss pot", "Capital income"],
+    sample: SAMPLE_INPUT_CASE_511,
+  },
+  "scope5-case512": {
+    label: "Scope 5 - Case 5.1.2",
+    description: "Whitelisted ETF loss demultiplied (IRRP=1).",
+    tags: ["AMMINISTRATO", "ETF UCITS", "IRRP=1", "Loss pot"],
+    sample: SAMPLE_INPUT_CASE_512,
+  },
+  "scope5-case513": {
+    label: "Scope 5 - Case 5.1.3",
+    description: "Partial whitelist ETF loss with IRRP-based adjustment.",
+    tags: ["AMMINISTRATO", "ETF UCITS", "IRRP partial", "Loss pot"],
+    sample: SAMPLE_INPUT_CASE_513,
+  },
+  "scope5-case514": {
+    label: "Scope 5 - Case 5.1.4",
+    description: "Whitelisted ETF gain with IRRP; no loss pot offset.",
+    tags: ["AMMINISTRATO", "ETF UCITS", "IRRP gain", "Loss pot"],
+    sample: SAMPLE_INPUT_CASE_514,
   },
 };
 
