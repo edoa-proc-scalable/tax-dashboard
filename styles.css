@@ -141,6 +141,10 @@ select {
   align-items: start;
 }
 
+.grid > * {
+  min-width: 0;
+}
+
 .left-column {
   display: grid;
   gap: 20px;
@@ -409,6 +413,10 @@ button:active {
   color: var(--ink);
   font-size: 0.75rem;
   font-weight: 600;
+  max-width: 100%;
+  flex-wrap: wrap;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .kpi-grid {
