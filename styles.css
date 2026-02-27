@@ -388,6 +388,15 @@ button:active {
 .output-panel {
   display: grid;
   gap: 20px;
+  min-width: 0;
+}
+
+.output-panel,
+.data-table,
+.summary,
+.table-scroll,
+.event-table {
+  max-width: 100%;
 }
 
 .badge {
@@ -456,6 +465,11 @@ button:active {
   border: 1px solid var(--border);
 }
 
+.summary p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
 
 .data-table h4 {
   margin: 0 0 12px;
@@ -467,6 +481,8 @@ button:active {
   overflow: auto;
   max-height: 360px;
   background: #fff;
+  width: 100%;
+  overflow-x: auto;
 }
 
 .event-table {
