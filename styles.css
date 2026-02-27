@@ -391,6 +391,10 @@ button:active {
   min-width: 0;
 }
 
+.output-panel > * {
+  min-width: 0;
+}
+
 .output-panel,
 .data-table,
 .summary,
@@ -440,6 +444,7 @@ button:active {
   padding: 16px;
   border: 1px solid var(--border);
   box-shadow: none;
+  min-width: 0;
 }
 
 .kpi p {
@@ -451,6 +456,12 @@ button:active {
 .kpi h3 {
   margin: 8px 0;
   font-size: 1.5rem;
+}
+
+.kpi p,
+.kpi h3,
+.kpi span {
+  overflow-wrap: anywhere;
 }
 
 .muted {
@@ -483,10 +494,12 @@ button:active {
   background: #fff;
   width: 100%;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .event-table {
-  width: 100%;
+  width: max-content;
+  min-width: 100%;
   border-collapse: collapse;
   font-size: 0.85rem;
 }
