@@ -290,6 +290,48 @@
                 </button>
               </div>
             </div>
+            <div class="scope-group">
+              <button class="scope-toggle" type="button" data-scope="scope7" aria-expanded="false">
+                <span class="scope-meta">
+                  <span class="scope-title">Scope 7</span>
+                  <span class="scope-subtitle">scope_07_short_selling</span>
+                </span>
+                <span class="chevron" aria-hidden="true"></span>
+              </button>
+              <div class="scope-cases" data-scope-cases="scope7" hidden>
+                <div class="case-group">7_1_short_core_cases</div>
+                <button class="case-item" type="button" data-case-id="scope7-case711">
+                  <span class="case-title">Case 7.1.1 - Short profit (tax on buy)</span>
+                  <span class="case-desc">Short sell then buy-to-cover with positive miscellaneous result.</span>
+                </button>
+                <button class="case-item" type="button" data-case-id="scope7-case712">
+                  <span class="case-title">Case 7.1.2 - Short loss (loss pot generation)</span>
+                  <span class="case-desc">Short loss with fees increases loss pot in AMMINISTRATO.</span>
+                </button>
+                <div class="case-group">7_2_short_reversals</div>
+                <button class="case-item" type="button" data-case-id="scope7-case721">
+                  <span class="case-title">Case 7.2.1 - Technical short with reversal</span>
+                  <span class="case-desc">Reversal produces a technical short and IFTT applies on close day.</span>
+                </button>
+                <div class="case-group">7_3_short_special_cases</div>
+                <button class="case-item" type="button" data-case-id="scope7-case731">
+                  <span class="case-title">Case 7.3.1 - Short profit on whitelisted ETF</span>
+                  <span class="case-desc">UCITS short profit taxed with IRRP-adjusted LIE factor.</span>
+                </button>
+                <button class="case-item" type="button" data-case-id="scope7-case732">
+                  <span class="case-title">Case 7.3.2 - Short loss on whitelisted ETF</span>
+                  <span class="case-desc">UCITS short loss loads loss pot with LIE adjustment.</span>
+                </button>
+                <button class="case-item" type="button" data-case-id="scope7-case733">
+                  <span class="case-title">Case 7.3.3 - Short profit with prior loss pot</span>
+                  <span class="case-desc">Existing loss pot offsets part of short gain taxable base.</span>
+                </button>
+                <button class="case-item" type="button" data-case-id="scope7-case734">
+                  <span class="case-title">Case 7.3.4 - Manufactured dividend on short</span>
+                  <span class="case-desc">Negative dividend cost reduces short strategy taxable gain.</span>
+                </button>
+              </div>
+            </div>
           </div>
           <p id="caseDescription" class="case-description"></p>
           <div id="caseTags" class="scope-tags"></div>

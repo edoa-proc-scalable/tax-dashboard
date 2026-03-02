@@ -3222,6 +3222,409 @@ const SAMPLE_INPUT_CASE_632 = `{
   ]
 }`;
 
+const SAMPLE_INPUT_CASE_711 = `{
+  "clientData": {
+    "countryOfTaxResidency": "IT",
+    "accountGroupId": "IT000051",
+    "taxRegime": "AMMINISTRATO"
+  },
+  "clientInitialState": {
+    "year": 2025,
+    "lossPots": {}
+  },
+  "events": [
+    {
+      "triggerReference": "1",
+      "isin": "DE0005140008",
+      "eventType": "INSTRUMENT_SELL",
+      "quantity": 1000,
+      "unitPrice": 16.0,
+      "accountGroupId": "IT000051",
+      "fee": 0.99,
+      "transactionTimestamp": "2025-06-10T03:00:00+00:00",
+      "valueDate": "2025-06-10"
+    },
+    {
+      "triggerReference": "2",
+      "isin": "DE0005140008",
+      "eventType": "INSTRUMENT_BUY",
+      "quantity": 1000,
+      "unitPrice": 15.0,
+      "accountGroupId": "IT000051",
+      "fee": 0.99,
+      "transactionTimestamp": "2025-06-15T03:00:00+00:00",
+      "valueDate": "2025-06-15"
+    }
+  ],
+  "securityMasterData": [
+    {
+      "isin": "DE0005140008",
+      "bankAssetType": "SHR",
+      "productType": "ORDINARY_SHARES",
+      "invFundUCITS": "NO",
+      "issuerGroup": "BANKS",
+      "countryOfOrigin": "DE",
+      "fttRelevance": "NONE"
+    }
+  ]
+}`;
+
+const SAMPLE_INPUT_CASE_712 = `{
+  "clientData": {
+    "countryOfTaxResidency": "IT",
+    "accountGroupId": "IT000051",
+    "taxRegime": "AMMINISTRATO"
+  },
+  "clientInitialState": {
+    "year": 2025,
+    "lossPots": {}
+  },
+  "events": [
+    {
+      "triggerReference": "1",
+      "isin": "DE0005140008",
+      "eventType": "INSTRUMENT_SELL",
+      "quantity": 1000,
+      "unitPrice": 16.0,
+      "accountGroupId": "IT000051",
+      "fee": 0.99,
+      "transactionTimestamp": "2025-06-10T03:00:00+00:00",
+      "valueDate": "2025-06-10"
+    },
+    {
+      "triggerReference": "2",
+      "isin": "DE0005140008",
+      "eventType": "INSTRUMENT_BUY",
+      "quantity": 1000,
+      "unitPrice": 17.0,
+      "accountGroupId": "IT000051",
+      "fee": 0.99,
+      "transactionTimestamp": "2025-06-15T03:00:00+00:00",
+      "valueDate": "2025-06-15"
+    }
+  ],
+  "securityMasterData": [
+    {
+      "isin": "DE0005140008",
+      "bankAssetType": "SHR",
+      "productType": "ORDINARY_SHARES",
+      "invFundUCITS": "NO",
+      "issuerGroup": "BANKS",
+      "countryOfOrigin": "DE",
+      "fttRelevance": "NONE"
+    }
+  ]
+}`;
+
+const SAMPLE_INPUT_CASE_721 = `{
+  "clientData": {
+    "countryOfTaxResidency": "IT",
+    "accountGroupId": "IT000052",
+    "taxRegime": "AMMINISTRATO"
+  },
+  "clientInitialState": {
+    "year": 2026,
+    "lossPots": {}
+  },
+  "events": [
+    {
+      "triggerReference": "T0",
+      "isin": "IT0003132476",
+      "eventType": "INSTRUMENT_BUY",
+      "quantity": 1000,
+      "unitPrice": 14.5,
+      "accountGroupId": "IT000052",
+      "fee": 1.0,
+      "transactionTimestamp": "2026-01-12T03:00:00+00:00",
+      "valueDate": "2026-01-12"
+    },
+    {
+      "triggerReference": "T1",
+      "isin": "IT0003132476",
+      "eventType": "INSTRUMENT_SELL",
+      "quantity": 1000,
+      "unitPrice": 15.0,
+      "accountGroupId": "IT000052",
+      "fee": 1.0,
+      "transactionTimestamp": "2026-01-13T03:00:00+00:00",
+      "valueDate": "2026-01-13"
+    },
+    {
+      "triggerReference": "T3",
+      "eventType": "REVERSAL",
+      "correctedTriggerReference": "T0",
+      "transactionTimestamp": "2026-01-14T03:00:00+00:00",
+      "valueDate": "2026-01-14"
+    },
+    {
+      "triggerReference": "T4",
+      "isin": "IT0003132476",
+      "eventType": "INSTRUMENT_BUY",
+      "quantity": 1000,
+      "unitPrice": 14.0,
+      "accountGroupId": "IT000052",
+      "fee": 1.0,
+      "transactionTimestamp": "2026-01-15T03:00:00+00:00",
+      "valueDate": "2026-01-15"
+    }
+  ],
+  "securityMasterData": [
+    {
+      "isin": "IT0003132476",
+      "bankAssetType": "SHR",
+      "productType": "ORDINARY_SHARES",
+      "invFundUCITS": "NO",
+      "issuerGroup": "COMPANIES_AND_PRIVATE_INDIVIDUALS",
+      "countryOfOrigin": "IT",
+      "fttRelevance": "YES"
+    }
+  ]
+}`;
+
+const SAMPLE_INPUT_CASE_731 = `{
+  "clientData": {
+    "countryOfTaxResidency": "IT",
+    "accountGroupId": "IT000071",
+    "taxRegime": "AMMINISTRATO"
+  },
+  "clientInitialState": {
+    "year": 2026,
+    "lossPots": {}
+  },
+  "events": [
+    {
+      "triggerReference": "1",
+      "isin": "IE00BMVB5M21",
+      "eventType": "INSTRUMENT_SELL",
+      "quantity": 100,
+      "unitPrice": 50.0,
+      "accountGroupId": "IT000071",
+      "fee": 1.0,
+      "transactionTimestamp": "2026-02-10T03:00:00+00:00",
+      "valueDate": "2026-02-10"
+    },
+    {
+      "triggerReference": "2",
+      "isin": "IE00BMVB5M21",
+      "eventType": "INSTRUMENT_BUY",
+      "quantity": 100,
+      "unitPrice": 45.0,
+      "accountGroupId": "IT000071",
+      "fee": 1.0,
+      "transactionTimestamp": "2026-03-10T03:00:00+00:00",
+      "valueDate": "2026-03-10"
+    }
+  ],
+  "securityMasterData": [
+    {
+      "isin": "IE00BMVB5M21",
+      "bankAssetType": "ETF",
+      "productType": "INDEX_FUNDS",
+      "invFundUCITS": "YES",
+      "issuerGroup": "COMPANIES_AND_PRIVATE_INDIVIDUALS",
+      "countryOfOrigin": "IE",
+      "fttRelevance": "NONE"
+    }
+  ],
+  "fundTaxData": [
+    {
+      "isin": "IE00BMVB5M21",
+      "validFrom": "2026-01-01",
+      "validTo": "2026-06-30",
+      "irrp": 0.3859
+    }
+  ]
+}`;
+
+const SAMPLE_INPUT_CASE_732 = `{
+  "clientData": {
+    "countryOfTaxResidency": "IT",
+    "accountGroupId": "IT000072",
+    "taxRegime": "AMMINISTRATO"
+  },
+  "clientInitialState": {
+    "year": 2026,
+    "lossPots": {}
+  },
+  "events": [
+    {
+      "triggerReference": "1",
+      "isin": "IE00BMVB5M21",
+      "eventType": "INSTRUMENT_SELL",
+      "quantity": 100,
+      "unitPrice": 50.0,
+      "accountGroupId": "IT000072",
+      "fee": 0.0,
+      "transactionTimestamp": "2026-02-10T03:00:00+00:00",
+      "valueDate": "2026-02-10"
+    },
+    {
+      "triggerReference": "2",
+      "isin": "IE00BMVB5M21",
+      "eventType": "INSTRUMENT_BUY",
+      "quantity": 100,
+      "unitPrice": 55.0,
+      "accountGroupId": "IT000072",
+      "fee": 0.0,
+      "transactionTimestamp": "2026-03-10T03:00:00+00:00",
+      "valueDate": "2026-03-10"
+    }
+  ],
+  "securityMasterData": [
+    {
+      "isin": "IE00BMVB5M21",
+      "bankAssetType": "ETF",
+      "productType": "INDEX_FUNDS",
+      "invFundUCITS": "YES",
+      "issuerGroup": "COMPANIES_AND_PRIVATE_INDIVIDUALS",
+      "countryOfOrigin": "IE",
+      "fttRelevance": "NONE"
+    }
+  ],
+  "fundTaxData": [
+    {
+      "isin": "IE00BMVB5M21",
+      "validFrom": "2026-01-01",
+      "validTo": "2026-06-30",
+      "irrp": 0.3859
+    }
+  ]
+}`;
+
+const SAMPLE_INPUT_CASE_733 = `{
+  "clientData": {
+    "countryOfTaxResidency": "IT",
+    "accountGroupId": "IT000073",
+    "taxRegime": "AMMINISTRATO"
+  },
+  "clientInitialState": {
+    "year": 2024,
+    "lossPots": {}
+  },
+  "events": [
+    {
+      "triggerReference": "1",
+      "isin": "IT0003132476",
+      "eventType": "INSTRUMENT_BUY",
+      "quantity": 10,
+      "unitPrice": 100.0,
+      "accountGroupId": "IT000073",
+      "fee": 0.0,
+      "transactionTimestamp": "2024-04-01T03:00:00+00:00",
+      "valueDate": "2024-04-01"
+    },
+    {
+      "triggerReference": "2",
+      "isin": "IT0003132476",
+      "eventType": "INSTRUMENT_SELL",
+      "quantity": 10,
+      "unitPrice": 70.0,
+      "accountGroupId": "IT000073",
+      "fee": 0.0,
+      "transactionTimestamp": "2024-04-02T03:00:00+00:00",
+      "valueDate": "2024-04-02"
+    },
+    {
+      "triggerReference": "3",
+      "isin": "DE0005140008",
+      "eventType": "INSTRUMENT_SELL",
+      "quantity": 100,
+      "unitPrice": 50.0,
+      "accountGroupId": "IT000073",
+      "fee": 0.0,
+      "transactionTimestamp": "2025-06-10T03:00:00+00:00",
+      "valueDate": "2025-06-10"
+    },
+    {
+      "triggerReference": "4",
+      "isin": "DE0005140008",
+      "eventType": "INSTRUMENT_BUY",
+      "quantity": 100,
+      "unitPrice": 45.0,
+      "accountGroupId": "IT000073",
+      "fee": 0.0,
+      "transactionTimestamp": "2025-06-15T03:00:00+00:00",
+      "valueDate": "2025-06-15"
+    }
+  ],
+  "securityMasterData": [
+    {
+      "isin": "IT0003132476",
+      "bankAssetType": "SHR",
+      "productType": "ORDINARY_SHARES",
+      "invFundUCITS": "NO",
+      "issuerGroup": "COMPANIES_AND_PRIVATE_INDIVIDUALS",
+      "countryOfOrigin": "IT",
+      "fttRelevance": "YES"
+    },
+    {
+      "isin": "DE0005140008",
+      "bankAssetType": "SHR",
+      "productType": "ORDINARY_SHARES",
+      "invFundUCITS": "NO",
+      "issuerGroup": "BANKS",
+      "countryOfOrigin": "DE",
+      "fttRelevance": "NONE"
+    }
+  ]
+}`;
+
+const SAMPLE_INPUT_CASE_734 = `{
+  "clientData": {
+    "countryOfTaxResidency": "IT",
+    "accountGroupId": "IT000074",
+    "taxRegime": "AMMINISTRATO"
+  },
+  "clientInitialState": {
+    "year": 2025,
+    "lossPots": {}
+  },
+  "events": [
+    {
+      "triggerReference": "1",
+      "isin": "DE0005140008",
+      "eventType": "INSTRUMENT_SELL",
+      "quantity": 100,
+      "unitPrice": 20.0,
+      "accountGroupId": "IT000074",
+      "fee": 0.0,
+      "transactionTimestamp": "2025-03-01T03:00:00+00:00",
+      "valueDate": "2025-03-01"
+    },
+    {
+      "triggerReference": "2",
+      "isin": "DE0005140008",
+      "eventType": "DIST_SECU",
+      "accountGroupId": "IT000074",
+      "grossAmount": -30.0,
+      "transactionTimestamp": "2025-03-15T03:00:00+00:00",
+      "valueDate": "2025-03-15"
+    },
+    {
+      "triggerReference": "3",
+      "isin": "DE0005140008",
+      "eventType": "INSTRUMENT_BUY",
+      "quantity": 100,
+      "unitPrice": 19.0,
+      "accountGroupId": "IT000074",
+      "fee": 0.0,
+      "transactionTimestamp": "2025-04-01T03:00:00+00:00",
+      "valueDate": "2025-04-01"
+    }
+  ],
+  "securityMasterData": [
+    {
+      "isin": "DE0005140008",
+      "bankAssetType": "SHR",
+      "productType": "ORDINARY_SHARES",
+      "invFundUCITS": "NO",
+      "issuerGroup": "BANKS",
+      "countryOfOrigin": "DE",
+      "fttRelevance": "NONE"
+    }
+  ]
+}`;
+
 
 const STANDARD_TAX_RATE = 0.26;
 const FFTT_RATE = 0.004;
@@ -3538,6 +3941,48 @@ const CASES = {
     description: "IFTT exemption for ETF tracking Italian index.",
     tags: ["AMMINISTRATO", "IFTT", "ETF", "Exemption"],
     sample: SAMPLE_INPUT_CASE_632,
+  },
+  "scope7-case711": {
+    label: "Scope 7 - Case 7.1.1",
+    description: "Short profit on foreign share, tax triggered on buy-to-cover.",
+    tags: ["AMMINISTRATO", "Short", "Shares", "Profit"],
+    sample: SAMPLE_INPUT_CASE_711,
+  },
+  "scope7-case712": {
+    label: "Scope 7 - Case 7.1.2",
+    description: "Short loss on foreign share, generates loss pot.",
+    tags: ["AMMINISTRATO", "Short", "Shares", "Loss pot"],
+    sample: SAMPLE_INPUT_CASE_712,
+  },
+  "scope7-case721": {
+    label: "Scope 7 - Case 7.2.1",
+    description: "Technical short with reversal and IFTT on closing buy day.",
+    tags: ["AMMINISTRATO", "Short", "Reversal", "IFTT"],
+    sample: SAMPLE_INPUT_CASE_721,
+  },
+  "scope7-case731": {
+    label: "Scope 7 - Case 7.3.1",
+    description: "Short profit on whitelisted ETF with IRRP.",
+    tags: ["AMMINISTRATO", "Short", "ETF UCITS", "IRRP"],
+    sample: SAMPLE_INPUT_CASE_731,
+  },
+  "scope7-case732": {
+    label: "Scope 7 - Case 7.3.2",
+    description: "Short loss on whitelisted ETF with LIE-adjusted loss pot.",
+    tags: ["AMMINISTRATO", "Short", "ETF UCITS", "Loss pot"],
+    sample: SAMPLE_INPUT_CASE_732,
+  },
+  "scope7-case733": {
+    label: "Scope 7 - Case 7.3.3",
+    description: "Short profit with usage of existing loss pot.",
+    tags: ["AMMINISTRATO", "Short", "Shares", "Loss pot offset"],
+    sample: SAMPLE_INPUT_CASE_733,
+  },
+  "scope7-case734": {
+    label: "Scope 7 - Case 7.3.4",
+    description: "Manufactured dividend cost on short strategy.",
+    tags: ["AMMINISTRATO", "Short", "Dividend", "Manufactured"],
+    sample: SAMPLE_INPUT_CASE_734,
   },
 };
 
