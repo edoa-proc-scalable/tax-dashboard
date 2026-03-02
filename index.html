@@ -248,6 +248,48 @@
                 </button>
               </div>
             </div>
+            <div class="scope-group">
+              <button class="scope-toggle" type="button" data-scope="scope6" aria-expanded="false">
+                <span class="scope-meta">
+                  <span class="scope-title">Scope 6</span>
+                  <span class="scope-subtitle">scope_06_iftt</span>
+                </span>
+                <span class="chevron" aria-hidden="true"></span>
+              </button>
+              <div class="scope-cases" data-scope-cases="scope6" hidden>
+                <div class="case-group">6_1_iftt_core_cases</div>
+                <button class="case-item" type="button" data-case-id="scope6-case611">
+                  <span class="case-title">Case 6.1.1 - IFTT positive daily net (buy &gt; sell)</span>
+                  <span class="case-desc">IFTT applies on positive daily net long for Italian shares.</span>
+                </button>
+                <button class="case-item" type="button" data-case-id="scope6-case612">
+                  <span class="case-title">Case 6.1.2 - IFTT zero net intraday</span>
+                  <span class="case-desc">Intraday closure with net 0: no IFTT charged.</span>
+                </button>
+                <button class="case-item" type="button" data-case-id="scope6-case613">
+                  <span class="case-title">Case 6.1.3 - IFTT negative daily net (sell &gt; buy)</span>
+                  <span class="case-desc">Historical preload + same-day sell/buy with no IFTT on net short.</span>
+                </button>
+                <div class="case-group">6_2_iftt_exemptions</div>
+                <button class="case-item" type="button" data-case-id="scope6-case621">
+                  <span class="case-title">Case 6.2.1 - IFTT exemption small cap</span>
+                  <span class="case-desc">Italian small cap equity marked as IFTT exempt.</span>
+                </button>
+                <button class="case-item" type="button" data-case-id="scope6-case622">
+                  <span class="case-title">Case 6.2.2 - IFTT exemption foreign issuer</span>
+                  <span class="case-desc">Foreign issuer share is exempt from Italian IFTT.</span>
+                </button>
+                <div class="case-group">6_3_special_instruments</div>
+                <button class="case-item" type="button" data-case-id="scope6-case631">
+                  <span class="case-title">Case 6.3.1 - IFTT securitized derivative</span>
+                  <span class="case-desc">Certificate/warrant with IFTT deducted from client cash.</span>
+                </button>
+                <button class="case-item" type="button" data-case-id="scope6-case632">
+                  <span class="case-title">Case 6.3.2 - IFTT exemption ETF on IT index</span>
+                  <span class="case-desc">UCITS ETF remains IFTT exempt even on Italian equity index.</span>
+                </button>
+              </div>
+            </div>
           </div>
           <p id="caseDescription" class="case-description"></p>
           <div id="caseTags" class="scope-tags"></div>
