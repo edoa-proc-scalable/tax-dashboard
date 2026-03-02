@@ -3653,6 +3653,7 @@ const scopeList = document.getElementById("scopeList");
 const caseDescription = document.getElementById("caseDescription");
 const caseTags = document.getElementById("caseTags");
 const caseTitle = document.getElementById("caseTitle");
+const selectedCaseTitle = document.getElementById("selectedCaseTitle");
 
 const kpiTax = document.getElementById("kpiTax");
 const kpiTaxLabel = document.getElementById("kpiTaxLabel");
@@ -3992,6 +3993,7 @@ const setCaseUI = (caseId, { loadSample } = { loadSample: false }) => {
 
   caseDescription.textContent = data.description;
   caseTitle.textContent = data.label;
+  if (selectedCaseTitle) selectedCaseTitle.textContent = data.label;
   caseTags.innerHTML = "";
   data.tags.forEach((tag) => {
     const chip = document.createElement("span");
@@ -4014,6 +4016,127 @@ const setSelectedCaseButton = (caseId) => {
   });
 };
 
+const initializeCaseGroupAccordions = () => {
+  const scopePanels = document.querySelectorAll(".scope-cases");
+  scopePanels.forEach((scopePanel) => {
+    if (scopePanel.dataset.grouped === "true") return;
+
+    const originalChildren = Array.from(scopePanel.children).filter((node) => node.nodeType === Node.ELEMENT_NODE);
+    scopePanel.innerHTML = "";
+
+    let groupIndex = 0;
+    let currentGroupPanel = null;
+
+    originalChildren.forEach((child) => {
+      if (!(child instanceof HTMLElement)) return;
+
+      if (child.classList.contains("case-group")) {
+        groupIndex += 1;
+        const groupId = `${scopePanel.dataset.scopeCases}-group-${groupIndex}`;
+
+        const toggleBtn = document.createElement("button");
+        toggleBtn.type = "button";
+        toggleBtn.className = "case-group-toggle";
+        toggleBtn.dataset.groupId = groupId;
+        toggleBtn.setAttribute("aria-expanded", "false");
+
+        const label = document.createElement("span");
+        label.className = "case-group-label";
+        label.textContent = child.textContent.trim();
+
+        const chevron = document.createElement("span");
+        chevron.className = "case-group-chevron";
+        chevron.setAttribute("aria-hidden", "true");
+
+        toggleBtn.appendChild(label);
+        toggleBtn.appendChild(chevron);
+
+        currentGroupPanel = document.createElement("div");
+        currentGroupPanel.className = "case-group-panel";
+        currentGroupPanel.dataset.groupPanel = groupId;
+        currentGroupPanel.hidden = true;
+
+        scopePanel.appendChild(toggleBtn);
+        scopePanel.appendChild(currentGroupPanel);
+        return;
+      }
+
+      if (!child.classList.contains("case-item")) return;
+
+      if (!currentGroupPanel) {
+        groupIndex += 1;
+        const fallbackGroupId = `${scopePanel.dataset.scopeCases}-group-${groupIndex}`;
+
+        const fallbackToggle = document.createElement("button");
+        fallbackToggle.type = "button";
+        fallbackToggle.className = "case-group-toggle";
+        fallbackToggle.dataset.groupId = fallbackGroupId;
+        fallbackToggle.setAttribute("aria-expanded", "false");
+
+        const fallbackLabel = document.createElement("span");
+        fallbackLabel.className = "case-group-label";
+        fallbackLabel.textContent = "cases";
+
+        const fallbackChevron = document.createElement("span");
+        fallbackChevron.className = "case-group-chevron";
+        fallbackChevron.setAttribute("aria-hidden", "true");
+
+        fallbackToggle.appendChild(fallbackLabel);
+        fallbackToggle.appendChild(fallbackChevron);
+
+        currentGroupPanel = document.createElement("div");
+        currentGroupPanel.className = "case-group-panel";
+        currentGroupPanel.dataset.groupPanel = fallbackGroupId;
+        currentGroupPanel.hidden = true;
+
+        scopePanel.appendChild(fallbackToggle);
+        scopePanel.appendChild(currentGroupPanel);
+      }
+
+      currentGroupPanel.appendChild(child);
+    });
+
+    scopePanel.dataset.grouped = "true";
+  });
+};
+
+const revealCaseContext = (caseId) => {
+  const caseButton = document.querySelector(`.case-item[data-case-id="${caseId}"]`);
+  if (!caseButton) return;
+
+  const scopePanel = caseButton.closest(".scope-cases");
+  if (!scopePanel) return;
+
+  const scopeId = scopePanel.dataset.scopeCases;
+  const allScopePanels = document.querySelectorAll(".scope-cases");
+  const allScopeToggles = document.querySelectorAll(".scope-toggle");
+
+  allScopePanels.forEach((panel) => {
+    panel.hidden = panel !== scopePanel;
+  });
+
+  allScopeToggles.forEach((btn) => {
+    const isTarget = btn.dataset.scope === scopeId;
+    btn.setAttribute("aria-expanded", isTarget ? "true" : "false");
+    btn.classList.toggle("is-open", isTarget);
+  });
+
+  const targetGroupPanel = caseButton.closest(".case-group-panel");
+  const groupPanels = scopePanel.querySelectorAll(".case-group-panel");
+  const groupToggles = scopePanel.querySelectorAll(".case-group-toggle");
+
+  groupPanels.forEach((panel) => {
+    panel.hidden = panel !== targetGroupPanel;
+  });
+
+  groupToggles.forEach((btn) => {
+    const isTarget = targetGroupPanel && btn.dataset.groupId === targetGroupPanel.dataset.groupPanel;
+    btn.setAttribute("aria-expanded", isTarget ? "true" : "false");
+    btn.classList.toggle("is-open", Boolean(isTarget));
+  });
+};
+
+initializeCaseGroupAccordions();
 setSelectedCaseButton(currentCaseId);
 
 const labelEvent = (type) => {
@@ -4973,6 +5096,7 @@ document.getElementById("loadSampleBtn").addEventListener("click", () => {
 if (scopeList) {
   scopeList.addEventListener("click", (event) => {
     const toggle = event.target.closest(".scope-toggle");
+    const groupToggle = event.target.closest(".case-group-toggle");
     const caseButton = event.target.closest(".case-item");
 
     if (toggle) {
@@ -4997,20 +5121,36 @@ if (scopeList) {
       return;
     }
 
+    if (groupToggle) {
+      const scopePanel = groupToggle.closest(".scope-cases");
+      if (!scopePanel) return;
+
+      const groupId = groupToggle.dataset.groupId;
+      const targetPanel = scopePanel.querySelector(`[data-group-panel=\"${groupId}\"]`);
+      if (!targetPanel) return;
+
+      const willExpand = targetPanel.hidden;
+      const groupPanels = scopePanel.querySelectorAll(".case-group-panel");
+      const groupToggles = scopePanel.querySelectorAll(".case-group-toggle");
+
+      groupPanels.forEach((panel) => {
+        panel.hidden = panel !== targetPanel || !willExpand;
+      });
+
+      groupToggles.forEach((btn) => {
+        const isTarget = btn === groupToggle;
+        btn.setAttribute("aria-expanded", isTarget && willExpand ? "true" : "false");
+        btn.classList.toggle("is-open", isTarget && willExpand);
+      });
+      return;
+    }
+
     if (caseButton) {
       const caseId = caseButton.dataset.caseId;
       currentCaseId = caseId;
       setCaseUI(caseId, { loadSample: true });
       setSelectedCaseButton(caseId);
-      const parentScope = caseButton.closest(".scope-cases");
-      if (parentScope) {
-        const scopeId = parentScope.dataset.scopeCases;
-        const toggleBtn = document.querySelector(`.scope-toggle[data-scope=\"${scopeId}\"]`);
-        if (toggleBtn) {
-          toggleBtn.classList.add("is-open");
-          toggleBtn.setAttribute("aria-expanded", "true");
-        }
-      }
+      revealCaseContext(caseId);
       compute();
     }
   });

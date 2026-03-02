@@ -27,6 +27,11 @@
             <h2>Case selector</h2>
           </div>
           <label class="input-label">Scopes</label>
+          <div class="selected-case-summary">
+            <p id="selectedCaseTitle" class="selected-case-title">Scope 1 - Case 1.1.1</p>
+            <p id="caseDescription" class="case-description"></p>
+            <div id="caseTags" class="scope-tags"></div>
+          </div>
           <div id="scopeList" class="scope-list">
             <div class="scope-group">
               <button class="scope-toggle" type="button" data-scope="scope1" aria-expanded="false">
@@ -333,8 +338,6 @@
               </div>
             </div>
           </div>
-          <p id="caseDescription" class="case-description"></p>
-          <div id="caseTags" class="scope-tags"></div>
           <div class="actions">
             <button id="loadSampleBtn" class="ghost">Load case input</button>
             <button id="computeBtn" class="primary">Compute output</button>
