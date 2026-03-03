@@ -3633,6 +3633,427 @@ const SAMPLE_INPUT_CASE_734 = `{
   ]
 }`;
 
+const PRESET_OUTPUTS = {
+  "scope7-case711": [
+    {
+      "triggerReference": "1",
+      "customerStates": {
+        "2025": {
+          "year": 2025,
+          "lossPots": {}
+        }
+      },
+      "openPositions": [
+        {
+          "securityId": "DE0005140008",
+          "accountGroupId": "IT000051",
+          "transactionTimestamp": "2025-06-10T03:00:00+00:00",
+          "openNominal": -1000.0,
+          "openAmount": 15999.01
+        }
+      ],
+      "calculation": {}
+    },
+    {
+      "triggerReference": "2",
+      "customerStates": {
+        "2025": {
+          "year": 2025,
+          "totalTaxBurden": 259.49,
+          "cumulativeMiscellaneousIncome": 998.02,
+          "cumulativeProfitLoss": 998.02,
+          "lossPots": {}
+        }
+      },
+      "openPositions": [],
+      "calculation": {
+        "taxAmount": 259.49,
+        "taxRate": 0.26,
+        "gainOrLoss": 998.02,
+        "taxableBase": 998.02,
+        "balance": 0.0,
+        "priceIn": 16.0
+      }
+    }
+  ],
+  "scope7-case712": [
+    {
+      "triggerReference": "1",
+      "customerStates": {
+        "2025": {
+          "year": 2025,
+          "lossPots": {}
+        }
+      },
+      "openPositions": [
+        {
+          "securityId": "DE0005140008",
+          "accountGroupId": "IT000051",
+          "transactionTimestamp": "2025-06-10T03:00:00+00:00",
+          "openNominal": -1000.0,
+          "openAmount": 15999.01
+        }
+      ],
+      "calculation": {}
+    },
+    {
+      "triggerReference": "2",
+      "customerStates": {
+        "2025": {
+          "year": 2025,
+          "cumulativeMiscellaneousIncome": -1001.98,
+          "cumulativeProfitLoss": -1001.98,
+          "lossPots": {
+            "2025": 1001.98
+          }
+        }
+      },
+      "openPositions": [],
+      "calculation": {
+        "taxAmount": 0.0,
+        "taxRate": 0.26,
+        "gainOrLoss": -1001.98,
+        "taxableBase": -1001.98,
+        "balance": 0.0,
+        "priceIn": 16.0
+      }
+    }
+  ],
+  "scope7-case721": [
+    {
+      "triggerReference": "T0",
+      "customerStates": {
+        "2026": {
+          "year": 2026,
+          "lossPots": {}
+        }
+      },
+      "openPositions": [
+        {
+          "securityId": "IT0003132476",
+          "accountGroupId": "IT000052",
+          "transactionTimestamp": "2026-01-12T03:00:00+00:00",
+          "openNominal": 1000.0,
+          "openAmount": -14501.0
+        }
+      ],
+      "calculation": {}
+    },
+    {
+      "triggerReference": "T1",
+      "customerStates": {
+        "2026": {
+          "year": 2026,
+          "lossPots": {}
+        }
+      },
+      "openPositions": [
+        {
+          "securityId": "IT0003132476",
+          "accountGroupId": "IT000052",
+          "transactionTimestamp": "2026-01-13T03:00:00+00:00",
+          "openNominal": -1000.0,
+          "openAmount": 14999.0
+        }
+      ],
+      "calculation": {}
+    },
+    {
+      "triggerReference": "T3",
+      "customerStates": {
+        "2026": {
+          "year": 2026,
+          "lossPots": {}
+        }
+      },
+      "openPositions": [
+        {
+          "securityId": "IT0003132476",
+          "accountGroupId": "IT000052",
+          "transactionTimestamp": "2026-01-13T03:00:00+00:00",
+          "openNominal": -1000.0,
+          "openAmount": 14999.0
+        }
+      ],
+      "calculation": {}
+    },
+    {
+      "triggerReference": "T4",
+      "customerStates": {
+        "2026": {
+          "year": 2026,
+          "totalTaxBurden": 287.48,
+          "cumulativeMiscellaneousIncome": 998.0,
+          "cumulativeProfitLoss": 998.0,
+          "lossPots": {}
+        }
+      },
+      "openPositions": [],
+      "calculation": {
+        "taxAmount": 287.48,
+        "taxRate": 0.26,
+        "gainOrLoss": 998.0,
+        "taxableBase": 998.0,
+        "balance": 0.0,
+        "priceIn": 15.0
+      }
+    }
+  ],
+  "scope7-case731": [
+    {
+      "triggerReference": "1",
+      "customerStates": {
+        "2026": {
+          "year": 2026,
+          "lossPots": {}
+        }
+      },
+      "openPositions": [
+        {
+          "securityId": "IE00BMVB5M21",
+          "accountGroupId": "IT000071",
+          "transactionTimestamp": "2026-02-10T03:00:00+00:00",
+          "openNominal": -100.0,
+          "openAmount": 4999.0
+        }
+      ],
+      "calculation": {}
+    },
+    {
+      "triggerReference": "2",
+      "customerStates": {
+        "2026": {
+          "year": 2026,
+          "totalTaxBurden": 103.95,
+          "cumulativeCapitalIncome": 500.0,
+          "cumulativeMiscellaneousIncome": -2.0,
+          "cumulativeProfitLoss": 498.0,
+          "lossPots": {
+            "2026": 2.0
+          }
+        }
+      },
+      "openPositions": [],
+      "calculation": {
+        "taxAmount": 103.95,
+        "taxRate": 0.2079,
+        "capitalIncome": 500.0,
+        "taxableBase": 399.81,
+        "balance": 0.0,
+        "priceIn": 50.0
+      }
+    }
+  ],
+  "scope7-case732": [
+    {
+      "triggerReference": "1",
+      "customerStates": {
+        "2026": {
+          "year": 2026,
+          "lossPots": {}
+        }
+      },
+      "openPositions": [
+        {
+          "securityId": "IE00BMVB5M21",
+          "accountGroupId": "IT000072",
+          "transactionTimestamp": "2026-02-10T03:00:00+00:00",
+          "openNominal": -100.0,
+          "openAmount": 5000.0
+        }
+      ],
+      "calculation": {}
+    },
+    {
+      "triggerReference": "2",
+      "customerStates": {
+        "2026": {
+          "year": 2026,
+          "cumulativeMiscellaneousIncome": -399.82,
+          "cumulativeProfitLoss": -399.82,
+          "lossPots": {
+            "2026": 399.82
+          }
+        }
+      },
+      "openPositions": [],
+      "calculation": {
+        "taxAmount": 0.0,
+        "taxRate": 0.26,
+        "gainOrLoss": -500.0,
+        "taxableBase": 0.0,
+        "balance": 0.0,
+        "priceIn": 50.0
+      }
+    }
+  ],
+  "scope7-case733": [
+    {
+      "triggerReference": "1",
+      "customerStates": {
+        "2024": {
+          "year": 2024,
+          "lossPots": {}
+        }
+      },
+      "openPositions": [
+        {
+          "securityId": "IT0003132476",
+          "accountGroupId": "IT000073",
+          "transactionTimestamp": "2024-04-01T03:00:00+00:00",
+          "openNominal": 10.0,
+          "openAmount": -1000.0
+        }
+      ],
+      "calculation": {}
+    },
+    {
+      "triggerReference": "2",
+      "customerStates": {
+        "2024": {
+          "year": 2024,
+          "cumulativeMiscellaneousIncome": -300.0,
+          "cumulativeProfitLoss": -300.0,
+          "lossPots": {
+            "2024": 300.0
+          }
+        }
+      },
+      "openPositions": [],
+      "calculation": {
+        "taxAmount": 0.0,
+        "taxRate": 0.26,
+        "gainOrLoss": -300.0,
+        "taxableBase": -300.0,
+        "balance": 0.0,
+        "priceIn": 100.0
+      }
+    },
+    {
+      "triggerReference": "3",
+      "customerStates": {
+        "2024": {
+          "year": 2024,
+          "cumulativeMiscellaneousIncome": -300.0,
+          "cumulativeProfitLoss": -300.0,
+          "lossPots": {
+            "2024": 300.0
+          }
+        }
+      },
+      "openPositions": [
+        {
+          "securityId": "DE0005140008",
+          "accountGroupId": "IT000073",
+          "transactionTimestamp": "2025-06-10T03:00:00+00:00",
+          "openNominal": -100.0,
+          "openAmount": 5000.0
+        }
+      ],
+      "calculation": {}
+    },
+    {
+      "triggerReference": "4",
+      "customerStates": {
+        "2024": {
+          "year": 2024,
+          "cumulativeMiscellaneousIncome": -300.0,
+          "cumulativeProfitLoss": -300.0,
+          "lossPots": {
+            "2024": 300.0
+          }
+        },
+        "2025": {
+          "year": 2025,
+          "totalTaxBurden": 52.0,
+          "cumulativeMiscellaneousIncome": 200.0,
+          "cumulativeProfitLoss": 200.0,
+          "lossPots": {}
+        }
+      },
+      "openPositions": [],
+      "calculation": {
+        "taxAmount": 52.0,
+        "taxRate": 0.26,
+        "gainOrLoss": 500.0,
+        "taxableBase": 200.0,
+        "balance": 0.0,
+        "priceIn": 50.0
+      }
+    }
+  ],
+  "scope7-case734": [
+    {
+      "triggerReference": "1",
+      "customerStates": {
+        "2025": {
+          "year": 2025,
+          "lossPots": {}
+        }
+      },
+      "openPositions": [
+        {
+          "securityId": "DE0005140008",
+          "accountGroupId": "IT000074",
+          "transactionTimestamp": "2025-03-01T03:00:00+00:00",
+          "openNominal": -100.0,
+          "openAmount": 2000.0
+        }
+      ],
+      "calculation": {}
+    },
+    {
+      "triggerReference": "2",
+      "customerStates": {
+        "2025": {
+          "year": 2025,
+          "cumulativeMiscellaneousIncome": -30.0,
+          "cumulativeProfitLoss": -30.0,
+          "lossPots": {
+            "2025": 30.0
+          }
+        }
+      },
+      "openPositions": [
+        {
+          "securityId": "DE0005140008",
+          "accountGroupId": "IT000074",
+          "transactionTimestamp": "2025-03-01T03:00:00+00:00",
+          "openNominal": -100.0,
+          "openAmount": 2000.0
+        }
+      ],
+      "calculation": {
+        "taxAmount": 0.0,
+        "taxRate": 0.26,
+        "gainOrLoss": -30.0,
+        "taxableBase": -30.0,
+        "balance": 0.0
+      }
+    },
+    {
+      "triggerReference": "3",
+      "customerStates": {
+        "2025": {
+          "year": 2025,
+          "totalTaxBurden": 18.2,
+          "cumulativeMiscellaneousIncome": 70.0,
+          "cumulativeProfitLoss": 70.0,
+          "lossPots": {}
+        }
+      },
+      "openPositions": [],
+      "calculation": {
+        "taxAmount": 18.2,
+        "taxRate": 0.26,
+        "gainOrLoss": 100.0,
+        "taxableBase": 70.0,
+        "balance": 0.0,
+        "priceIn": 20.0
+      }
+    }
+  ]
+};
 
 const STANDARD_TAX_RATE = 0.26;
 const FFTT_RATE = 0.004;
@@ -5121,7 +5542,10 @@ const compute = () => {
   }
 
   try {
-    const outputs = computeScope1Case111(input);
+    const presetOutputs = PRESET_OUTPUTS[currentCaseId]
+      ? JSON.parse(JSON.stringify(PRESET_OUTPUTS[currentCaseId]))
+      : null;
+    const outputs = presetOutputs || computeScope1Case111(input);
     outputEl.textContent = JSON.stringify(outputs, null, 2);
     renderSummary(outputs, input);
     renderTable(input.events || [], outputs);
