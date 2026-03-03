@@ -249,43 +249,14 @@ select {
   border-top: 1px solid var(--border);
 }
 
-.case-group-toggle {
-  width: 100%;
-  border: 1px solid var(--border);
-  background: #fff;
-  color: var(--ink);
-  border-radius: 6px;
-  padding: 8px 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  text-align: left;
-  font-family: var(--mono);
+.case-group {
   font-size: 0.72rem;
+  color: var(--muted);
+  font-family: var(--mono);
   letter-spacing: 0.02em;
-}
-
-.case-group-toggle:hover {
-  background: #f9fafb;
-}
-
-.case-group-chevron {
-  width: 8px;
-  height: 8px;
-  border-right: 1.5px solid #6b7280;
-  border-bottom: 1.5px solid #6b7280;
-  transform: rotate(45deg);
-  transition: transform 0.15s ease;
-}
-
-.case-group-toggle.is-open .case-group-chevron {
-  transform: rotate(-135deg);
-}
-
-.case-group-panel {
-  display: grid;
-  gap: 6px;
-  padding-left: 8px;
+  text-transform: uppercase;
+  margin: 2px 0 0;
+  padding: 4px 2px;
 }
 
 .case-item {
