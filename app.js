@@ -5325,6 +5325,9 @@ const renderTable = (events, outputs) => {
     const refCell = document.createElement("td");
     refCell.textContent = entry.triggerReference || event.triggerReference || "--";
 
+    const eventTypeCell = document.createElement("td");
+    eventTypeCell.textContent = event.eventType ? labelEvent(event.eventType) : "--";
+
     const dateCell = document.createElement("td");
     dateCell.textContent = formatDate(
       primaryPos?.transactionTimestamp || event.transactionTimestamp || event.valueDate
@@ -5372,6 +5375,7 @@ const renderTable = (events, outputs) => {
     row.append(
       toggleCell,
       refCell,
+      eventTypeCell,
       dateCell,
       isinCell,
       accountCell,
