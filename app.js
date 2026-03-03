@@ -3649,7 +3649,7 @@ const EventType = {
 const inputEl = document.getElementById("inputJson");
 const outputEl = document.getElementById("outputJson");
 const errorBox = document.getElementById("errorBox");
-const scopeList = document.getElementById("scopeList");
+const caseSearchInput = document.getElementById("caseSearch");
 const caseSelect = document.getElementById("caseSelect");
 const caseDescription = document.getElementById("caseDescription");
 const caseTags = document.getElementById("caseTags");
@@ -3664,7 +3664,14 @@ const kpiType = document.getElementById("kpiType");
 const kpiPositions = document.getElementById("kpiPositions");
 const kpiBalance = document.getElementById("kpiBalance");
 const summaryBox = document.getElementById("summaryBox");
+const eventTable = document.getElementById("eventTable");
 const eventTableBody = document.getElementById("eventTableBody");
+const tableState = document.getElementById("tableState");
+const tableStateBadge = document.getElementById("tableStateBadge");
+const tableStateTitle = document.getElementById("tableStateTitle");
+const tableStateText = document.getElementById("tableStateText");
+const densityComfortableBtn = document.getElementById("densityComfortableBtn");
+const densityCompactBtn = document.getElementById("densityCompactBtn");
 const outputStatus = document.getElementById("outputStatus");
 
 const CASES = {
@@ -4026,6 +4033,8 @@ const normalizeCaseLabel = (label) => {
   return label.replace(/^Scope\s+\d+\s*-\s*/i, "");
 };
 
+const normalizeText = (value) => String(value || "").toLowerCase();
+
 const getCaseCode = (label, fallback = "") => {
   const match = /Case\s+([0-9]+(?:\.[0-9A-Za-z]+)*)/i.exec(label || "");
   if (match) return `Case ${match[1]}`;
@@ -4103,19 +4112,48 @@ const getScopeEntries = () => {
     .map(([scopeId, entries]) => [scopeId, entries.sort(compareCaseEntries)]);
 };
 
-const populateCaseSelect = () => {
+const caseMatchesSearch = (scopeId, caseId, caseData, searchTerm) => {
+  if (!searchTerm) return true;
+
+  const scopeNumber = getScopeNumber(scopeId);
+  const searchable = [
+    caseId,
+    caseData?.label,
+    normalizeCaseLabel(caseData?.label),
+    caseData?.description,
+    getCaseCode(caseData?.label, caseId),
+    summarizeDescription(caseData?.description),
+    formatScopeSubtitle(scopeId),
+    Number.isFinite(scopeNumber) ? `scope ${scopeNumber}` : scopeId,
+    ...(caseData?.tags || []),
+  ]
+    .map((item) => normalizeText(item))
+    .join(" ");
+
+  return searchable.includes(normalizeText(searchTerm));
+};
+
+const populateCaseSelect = (searchTerm = "") => {
   if (!caseSelect) return;
 
   caseSelect.innerHTML = "";
 
+  let hasMatches = false;
+
   getScopeEntries().forEach(([scopeId, entries]) => {
+    const filteredEntries = entries.filter(([caseId, caseData]) =>
+      caseMatchesSearch(scopeId, caseId, caseData, searchTerm)
+    );
+
+    if (filteredEntries.length === 0) return;
+
     const scopeNumber = getScopeNumber(scopeId);
     const optGroup = document.createElement("optgroup");
     optGroup.label = Number.isFinite(scopeNumber)
       ? `Scope ${scopeNumber} - ${formatScopeSubtitle(scopeId)}`
       : formatScopeSubtitle(scopeId);
 
-    entries.forEach(([caseId, caseData]) => {
+    filteredEntries.forEach(([caseId, caseData]) => {
       const option = document.createElement("option");
       option.value = caseId;
       option.textContent = `${getCaseCode(caseData?.label, caseId)} - ${summarizeDescription(caseData?.description)}`;
@@ -4123,107 +4161,31 @@ const populateCaseSelect = () => {
     });
 
     caseSelect.appendChild(optGroup);
+    hasMatches = true;
   });
 
-  caseSelect.value = currentCaseId;
+  if (!hasMatches) {
+    const emptyOption = document.createElement("option");
+    emptyOption.textContent = "No matching cases";
+    emptyOption.disabled = true;
+    emptyOption.selected = true;
+    caseSelect.appendChild(emptyOption);
+    return;
+  }
+
+  const currentOption = caseSelect.querySelector(`option[value="${currentCaseId}"]`);
+  if (currentOption) {
+    caseSelect.value = currentCaseId;
+    return;
+  }
+
+  const firstOption = caseSelect.querySelector("option:not([disabled])");
+  if (firstOption) caseSelect.value = firstOption.value;
 };
 
-const buildScopeList = () => {
-  if (!scopeList) return;
-
-  scopeList.innerHTML = "";
-
-  getScopeEntries().forEach(([scopeId, entries]) => {
-    const scopeNumber = getScopeNumber(scopeId);
-    const scopeGroup = document.createElement("div");
-    scopeGroup.className = "scope-group";
-
-    const toggle = document.createElement("button");
-    toggle.type = "button";
-    toggle.className = "scope-toggle";
-    toggle.dataset.scope = scopeId;
-    toggle.setAttribute("aria-expanded", "false");
-
-    const meta = document.createElement("span");
-    meta.className = "scope-meta";
-
-    const title = document.createElement("span");
-    title.className = "scope-title";
-    title.textContent = Number.isFinite(scopeNumber) ? `Scope ${scopeNumber}` : scopeId;
-
-    const subtitle = document.createElement("span");
-    subtitle.className = "scope-subtitle";
-    subtitle.textContent = SCOPE_SUBTITLES[scopeId] || scopeId;
-
-    const chevron = document.createElement("span");
-    chevron.className = "chevron";
-    chevron.setAttribute("aria-hidden", "true");
-
-    meta.appendChild(title);
-    meta.appendChild(subtitle);
-    toggle.appendChild(meta);
-    toggle.appendChild(chevron);
-
-    const panel = document.createElement("div");
-    panel.className = "scope-cases";
-    panel.dataset.scopeCases = scopeId;
-    panel.hidden = true;
-
-    entries.forEach(([caseId, caseData]) => {
-      const readableLabel = normalizeCaseLabel(caseData?.label || caseId);
-
-      const caseButton = document.createElement("button");
-      caseButton.type = "button";
-      caseButton.className = "case-item";
-      caseButton.dataset.caseId = caseId;
-      caseButton.title = `${caseId} - ${readableLabel}`;
-
-      const caseTitle = document.createElement("span");
-      caseTitle.className = "case-title";
-      caseTitle.textContent = `${caseId} - ${readableLabel}`;
-
-      const caseDesc = document.createElement("span");
-      caseDesc.className = "case-desc";
-      caseDesc.textContent = caseData?.description || "No description available.";
-
-      caseButton.appendChild(caseTitle);
-      caseButton.appendChild(caseDesc);
-      panel.appendChild(caseButton);
-    });
-
-    scopeGroup.appendChild(toggle);
-    scopeGroup.appendChild(panel);
-    scopeList.appendChild(scopeGroup);
-  });
-};
-
-const openScope = (scopeId, forceOpen = true) => {
-  const allPanels = document.querySelectorAll(".scope-cases");
-  const allToggles = document.querySelectorAll(".scope-toggle");
-  const targetPanel = document.querySelector(`[data-scope-cases=\"${scopeId}\"]`);
-
-  if (!targetPanel) return;
-
-  allPanels.forEach((panel) => {
-    panel.hidden = panel !== targetPanel || !forceOpen;
-  });
-
-  allToggles.forEach((btn) => {
-    const isTarget = btn.dataset.scope === scopeId;
-    btn.classList.toggle("is-open", isTarget && forceOpen);
-    btn.setAttribute("aria-expanded", isTarget && forceOpen ? "true" : "false");
-  });
-};
-
-const openScopeForCase = (caseId) => {
-  const scopeId = String(caseId || "").split("-")[0];
-  if (scopeId) openScope(scopeId, true);
-};
 
 populateCaseSelect();
-buildScopeList();
 setSelectedCaseButton(currentCaseId);
-openScopeForCase(currentCaseId);
 
 const labelEvent = (type) => {
   switch (type) {
@@ -4260,6 +4222,56 @@ const formatDate = (value) => {
   return parts[0] || "--";
 };
 
+const setTableState = (state) => {
+  if (!tableState || !tableStateBadge || !tableStateTitle || !tableStateText) return;
+
+  if (state === "hidden") {
+    tableState.hidden = true;
+    if (eventTable) eventTable.hidden = false;
+    return;
+  }
+
+  const states = {
+    loading: {
+      badge: "Loading",
+      title: "Computing event timeline",
+      text: "Applying fiscal logic and rebuilding the table.",
+    },
+    empty: {
+      badge: "Empty",
+      title: "No rows to display",
+      text: "Load a case and compute to populate the event table.",
+    },
+    error: {
+      badge: "Error",
+      title: "Unable to render the table",
+      text: "Fix the input JSON and run compute again.",
+    },
+  };
+
+  const snapshot = states[state] || states.empty;
+  tableStateBadge.textContent = snapshot.badge;
+  tableStateTitle.textContent = snapshot.title;
+  tableStateText.textContent = snapshot.text;
+  tableState.dataset.state = state;
+  tableState.hidden = false;
+  if (eventTable) eventTable.hidden = true;
+};
+
+const setTableDensity = (density) => {
+  if (!eventTable) return;
+  const normalized = density === "compact" ? "compact" : "comfortable";
+  eventTable.dataset.density = normalized;
+
+  if (densityComfortableBtn) {
+    densityComfortableBtn.classList.toggle("is-active", normalized === "comfortable");
+  }
+
+  if (densityCompactBtn) {
+    densityCompactBtn.classList.toggle("is-active", normalized === "compact");
+  }
+};
+
 const getLatestState = (customerStates) => {
   if (!customerStates) return { year: null, state: null };
   const years = Object.keys(customerStates)
@@ -4286,6 +4298,7 @@ const showError = (message) => {
   outputStatus.textContent = "Error";
   outputStatus.style.background = "#f3f4f6";
   outputStatus.style.color = "#111827";
+  setTableState("error");
 };
 
 const clearError = () => {
@@ -4901,7 +4914,13 @@ const computeScope1Case111 = (input) => {
 const renderTable = (events, outputs) => {
   if (!eventTableBody) return;
   eventTableBody.innerHTML = "";
-  if (!outputs || outputs.length === 0) return;
+
+  if (!outputs || outputs.length === 0) {
+    setTableState("empty");
+    return;
+  }
+
+  setTableState("hidden");
 
   const columnCount = document.querySelectorAll(".event-table thead th").length || 1;
 
@@ -5142,6 +5161,7 @@ const compute = () => {
   outputStatus.textContent = "Computing...";
   outputStatus.style.background = "#f3f4f6";
   outputStatus.style.color = "#111827";
+  setTableState("loading");
 
   if (!currentCaseId || !CASES[currentCaseId]) {
     showError("Select a case before computing");
@@ -5179,31 +5199,6 @@ document.getElementById("loadSampleBtn").addEventListener("click", () => {
   compute();
 });
 
-if (scopeList) {
-  scopeList.addEventListener("click", (event) => {
-    const toggle = event.target.closest(".scope-toggle");
-    const caseButton = event.target.closest(".case-item");
-
-    if (toggle) {
-      const scopeId = toggle.dataset.scope;
-      const targetPanel = document.querySelector(`[data-scope-cases=\"${scopeId}\"]`);
-      if (!targetPanel) return;
-
-      openScope(scopeId, targetPanel.hidden);
-      return;
-    }
-
-    if (caseButton) {
-      const caseId = caseButton.dataset.caseId;
-      currentCaseId = caseId;
-      setCaseUI(caseId, { loadSample: true });
-      setSelectedCaseButton(caseId);
-      openScopeForCase(caseId);
-      compute();
-    }
-  });
-}
-
 if (caseSelect) {
   caseSelect.addEventListener("change", (event) => {
     const caseId = event.target.value;
@@ -5212,8 +5207,25 @@ if (caseSelect) {
     currentCaseId = caseId;
     setCaseUI(caseId, { loadSample: true });
     setSelectedCaseButton(caseId);
-    openScopeForCase(caseId);
     compute();
+  });
+}
+
+if (caseSearchInput) {
+  caseSearchInput.addEventListener("input", (event) => {
+    populateCaseSelect(event.target.value || "");
+  });
+}
+
+if (densityComfortableBtn) {
+  densityComfortableBtn.addEventListener("click", () => {
+    setTableDensity("comfortable");
+  });
+}
+
+if (densityCompactBtn) {
+  densityCompactBtn.addEventListener("click", () => {
+    setTableDensity("compact");
   });
 }
 
@@ -5231,10 +5243,13 @@ document.getElementById("clearBtn").addEventListener("click", () => {
   kpiPositions.textContent = "--";
   kpiBalance.textContent = "Balance --";
   clearError();
+  setTableState("empty");
 });
 
 document.getElementById("copyBtn").addEventListener("click", () => {
   navigator.clipboard.writeText(outputEl.textContent);
 });
 
+setTableDensity("comfortable");
+setTableState("empty");
 compute();

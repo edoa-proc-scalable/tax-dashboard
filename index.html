@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Scope Insights Dashboard</title>
-    <link rel="stylesheet" href="styles.css?v=20260303e" />
+    <link rel="stylesheet" href="styles.css?v=20260303f" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -27,7 +27,8 @@
             <h2>Case selector</h2>
           </div>
           <div class="case-jump">
-            <label class="input-label" for="caseSelect">Quick jump</label>
+            <label class="input-label" for="caseSearch">Quick jump</label>
+            <input id="caseSearch" type="search" placeholder="Search by case, scope, or keyword" autocomplete="off" />
             <select id="caseSelect" aria-label="Select test case"></select>
           </div>
           <label class="input-label">Selected case</label>
@@ -91,9 +92,20 @@
         </div>
 
         <div class="data-table">
-          <h4>Event table</h4>
+          <div class="data-table-header">
+            <h4>Event table</h4>
+            <div class="density-toggle" role="group" aria-label="Table density">
+              <button id="densityComfortableBtn" class="density-btn is-active" type="button">Comfortable</button>
+              <button id="densityCompactBtn" class="density-btn" type="button">Compact</button>
+            </div>
+          </div>
           <div class="table-scroll">
-            <table class="event-table">
+            <div id="tableState" class="table-state" hidden>
+              <p id="tableStateBadge" class="table-state-badge">Idle</p>
+              <p id="tableStateTitle" class="table-state-title">No events yet</p>
+              <p id="tableStateText" class="table-state-text">Load a case and compute to populate the table.</p>
+            </div>
+            <table id="eventTable" class="event-table" data-density="comfortable">
               <thead>
                 <tr>
                   <th></th>
@@ -127,6 +139,6 @@
 }</pre>
     </section>
 
-    <script src="app.js?v=20260303e"></script>
+    <script src="app.js?v=20260303f"></script>
   </body>
 </html>
