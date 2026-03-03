@@ -4487,6 +4487,151 @@ const SAMPLE_INPUT_CASE_922 = `{
   ]
 }`;
 
+
+const SAMPLE_INPUT_CASE_1011 = `{
+  "clientData": {
+    "countryOfTaxResidency": "IT",
+    "accountGroupId": "IT000062",
+    "taxRegime": "AMMINISTRATO"
+  },
+  "clientInitialState": {
+    "year": 2026,
+    "lossPots": {}
+  },
+  "events": [
+    {
+      "triggerReference": "1",
+      "isin": "IT0004967292",
+      "eventType": "DIVIDEND_PAYMENT",
+      "accountGroupId": "IT000062",
+      "quantity": 100,
+      "dividendPerShare": 1.0,
+      "grossAmount": 100.0,
+      "transactionTimestamp": "2026-05-20T01:00:00+00:00",
+      "valueDate": "2026-05-20"
+    }
+  ],
+  "securityMasterData": [
+    {
+      "isin": "IT0004967292",
+      "bankAssetType": "SHR",
+      "productType": "ORDINARY_SHARES",
+      "invFundUCITS": "NO",
+      "issuerGroup": "COMPANIES_AND_PRIVATE_INDIVIDUALS",
+      "countryOfOrigin": "IT",
+      "fttRelevance": "NONE"
+    }
+  ]
+}`;
+
+const SAMPLE_INPUT_CASE_1012 = `{
+  "clientData": {
+    "countryOfTaxResidency": "IT",
+    "accountGroupId": "IT000062",
+    "taxRegime": "AMMINISTRATO"
+  },
+  "clientInitialState": {
+    "year": 2026,
+    "lossPots": {}
+  },
+  "events": [
+    {
+      "triggerReference": "1",
+      "isin": "US0378331005",
+      "eventType": "DIVIDEND_PAYMENT",
+      "accountGroupId": "IT000062",
+      "quantity": 10,
+      "dividendPerShare": 10.0,
+      "grossAmount": 100.0,
+      "transactionTimestamp": "2026-06-15T01:00:00+00:00",
+      "valueDate": "2026-06-15"
+    }
+  ],
+  "securityMasterData": [
+    {
+      "isin": "US0378331005",
+      "bankAssetType": "SHR",
+      "productType": "ORDINARY_SHARES",
+      "invFundUCITS": "NO",
+      "issuerGroup": "COMPANIES_AND_PRIVATE_INDIVIDUALS",
+      "countryOfOrigin": "US",
+      "fttRelevance": "NONE"
+    }
+  ]
+}`;
+
+const SAMPLE_INPUT_CASE_1013 = `{
+  "clientData": {
+    "countryOfTaxResidency": "IT",
+    "accountGroupId": "IT000063",
+    "taxRegime": "DICHIARATIVO"
+  },
+  "clientInitialState": {
+    "year": 2026,
+    "lossPots": {}
+  },
+  "events": [
+    {
+      "triggerReference": "1",
+      "isin": "IT0004967292",
+      "eventType": "DIVIDEND_PAYMENT",
+      "accountGroupId": "IT000063",
+      "quantity": 100,
+      "dividendPerShare": 1.0,
+      "grossAmount": 100.0,
+      "transactionTimestamp": "2026-05-20T01:00:00+00:00",
+      "valueDate": "2026-05-20"
+    }
+  ],
+  "securityMasterData": [
+    {
+      "isin": "IT0004967292",
+      "bankAssetType": "SHR",
+      "productType": "ORDINARY_SHARES",
+      "invFundUCITS": "NO",
+      "issuerGroup": "COMPANIES_AND_PRIVATE_INDIVIDUALS",
+      "countryOfOrigin": "IT",
+      "fttRelevance": "NONE"
+    }
+  ]
+}`;
+
+const SAMPLE_INPUT_CASE_1014 = `{
+  "clientData": {
+    "countryOfTaxResidency": "IT",
+    "accountGroupId": "IT000063",
+    "taxRegime": "DICHIARATIVO"
+  },
+  "clientInitialState": {
+    "year": 2026,
+    "lossPots": {}
+  },
+  "events": [
+    {
+      "triggerReference": "1",
+      "isin": "US0378331005",
+      "eventType": "DIVIDEND_PAYMENT",
+      "accountGroupId": "IT000063",
+      "quantity": 10,
+      "dividendPerShare": 10.0,
+      "grossAmount": 100.0,
+      "transactionTimestamp": "2026-06-15T01:00:00+00:00",
+      "valueDate": "2026-06-15"
+    }
+  ],
+  "securityMasterData": [
+    {
+      "isin": "US0378331005",
+      "bankAssetType": "SHR",
+      "productType": "ORDINARY_SHARES",
+      "invFundUCITS": "NO",
+      "issuerGroup": "COMPANIES_AND_PRIVATE_INDIVIDUALS",
+      "countryOfOrigin": "US",
+      "fttRelevance": "NONE"
+    }
+  ]
+}`;
+
 const PRESET_OUTPUTS = {
   "scope7-case711": [
     {
@@ -5879,6 +6024,96 @@ const PRESET_OUTPUTS = {
         "taxableBase": 10.0
       }
     }
+  ],
+  "scope10-case1011": [
+    {
+      "triggerReference": "1",
+      "customerStates": {
+        "2026": {
+          "year": 2026,
+          "totalTaxBurden": 26.0,
+          "cumulativeMiscellaneousIncome": 0.0,
+          "cumulativeCapitalIncome": 100.0,
+          "cumulativeProfitLoss": 100.0,
+          "lossPots": {}
+        }
+      },
+      "openPositions": [],
+      "calculation": {
+        "taxAmount": 26.0,
+        "taxRate": 0.26,
+        "capitalIncome": 100.0,
+        "taxableBase": 100.0
+      }
+    }
+  ],
+  "scope10-case1012": [
+    {
+      "triggerReference": "1",
+      "customerStates": {
+        "2026": {
+          "year": 2026,
+          "totalTaxBurden": 37.1,
+          "cumulativeMiscellaneousIncome": 0.0,
+          "cumulativeCapitalIncome": 100.0,
+          "cumulativeProfitLoss": 100.0,
+          "lossPots": {}
+        }
+      },
+      "openPositions": [],
+      "calculation": {
+        "taxAmount": 22.1,
+        "taxRate": 0.26,
+        "capitalIncome": 100.0,
+        "taxableBase": 85.0,
+        "withholdingTaxCredit": 15.0
+      }
+    }
+  ],
+  "scope10-case1013": [
+    {
+      "triggerReference": "1",
+      "customerStates": {
+        "2026": {
+          "year": 2026,
+          "totalTaxBurden": 26.0,
+          "cumulativeMiscellaneousIncome": 0.0,
+          "cumulativeCapitalIncome": 100.0,
+          "cumulativeProfitLoss": 100.0,
+          "lossPots": {}
+        }
+      },
+      "openPositions": [],
+      "calculation": {
+        "taxAmount": 26.0,
+        "taxRate": 0.26,
+        "capitalIncome": 100.0,
+        "taxableBase": 100.0
+      }
+    }
+  ],
+  "scope10-case1014": [
+    {
+      "triggerReference": "1",
+      "customerStates": {
+        "2026": {
+          "year": 2026,
+          "totalTaxBurden": 37.1,
+          "cumulativeMiscellaneousIncome": 0.0,
+          "cumulativeCapitalIncome": 100.0,
+          "cumulativeProfitLoss": 100.0,
+          "lossPots": {}
+        }
+      },
+      "openPositions": [],
+      "calculation": {
+        "taxAmount": 22.1,
+        "taxRate": 0.26,
+        "capitalIncome": 100.0,
+        "taxableBase": 85.0,
+        "withholdingTaxCredit": 15.0
+      }
+    }
   ]
 };
 
@@ -6332,6 +6567,30 @@ const CASES = {
     tags: ["DICHIARATIVO", "Cash interest", "Bank deposit", "Trustee"],
     sample: SAMPLE_INPUT_CASE_922,
   },
+  "scope10-case1011": {
+    label: "Scope 10 - Case 10.1.1",
+    description: "Domestic dividend payment on Italian equity.",
+    tags: ["AMMINISTRATO", "Dividend", "Domestic", "Stock"],
+    sample: SAMPLE_INPUT_CASE_1011,
+  },
+  "scope10-case1012": {
+    label: "Scope 10 - Case 10.1.2",
+    description: "Foreign dividend payment with netto frontiera taxation.",
+    tags: ["AMMINISTRATO", "Dividend", "Foreign", "Netto frontiera"],
+    sample: SAMPLE_INPUT_CASE_1012,
+  },
+  "scope10-case1013": {
+    label: "Scope 10 - Case 10.1.3",
+    description: "Domestic dividend payment in dichiarativo (withholding at source).",
+    tags: ["DICHIARATIVO", "Dividend", "Domestic", "Stock"],
+    sample: SAMPLE_INPUT_CASE_1013,
+  },
+  "scope10-case1014": {
+    label: "Scope 10 - Case 10.1.4",
+    description: "Foreign dividend payment in dichiarativo (netto frontiera).",
+    tags: ["DICHIARATIVO", "Dividend", "Foreign", "Netto frontiera"],
+    sample: SAMPLE_INPUT_CASE_1014,
+  },
 };
 
 const setCaseUI = (caseId, { loadSample } = { loadSample: false }) => {
@@ -6407,6 +6666,7 @@ const SCOPE_SUBTITLES = {
   scope7: "scope_07_short_selling",
   scope8: "scope_08_reversals",
   scope9: "scope_09_interest_on_cash_balance",
+  scope10: "scope_10_dividends",
 };
 
 const getScopeNumber = (scopeId) => {
