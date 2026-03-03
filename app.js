@@ -4632,6 +4632,255 @@ const SAMPLE_INPUT_CASE_1014 = `{
   ]
 }`;
 
+
+const SAMPLE_INPUT_CASE_1021 = `{
+  "clientData": {
+    "countryOfTaxResidency": "IT",
+    "accountGroupId": "IT000064",
+    "taxRegime": "AMMINISTRATO"
+  },
+  "clientInitialState": {
+    "year": 2026,
+    "lossPots": {}
+  },
+  "events": [
+    {
+      "triggerReference": "1",
+      "isin": "IE00B1W57M07",
+      "eventType": "CA_DISTRIBUTIONS",
+      "accountGroupId": "IT000064",
+      "quantity": 100,
+      "dividendPerShare": 2.5,
+      "grossAmount": 250.0,
+      "transactionTimestamp": "2026-07-20T01:00:00+00:00",
+      "valueDate": "2026-07-20"
+    }
+  ],
+  "securityMasterData": [
+    {
+      "isin": "IE00B1W57M07",
+      "bankAssetType": "ETF",
+      "productType": "INDEX_FUNDS",
+      "invFundUCITS": "YES",
+      "issuerGroup": "COMPANIES_AND_PRIVATE_INDIVIDUALS",
+      "countryOfOrigin": "IE",
+      "fttRelevance": "NONE"
+    }
+  ]
+}`;
+
+const SAMPLE_INPUT_CASE_1022 = `{
+  "clientData": {
+    "countryOfTaxResidency": "IT",
+    "accountGroupId": "IT000065",
+    "taxRegime": "AMMINISTRATO"
+  },
+  "clientInitialState": {
+    "year": 2026,
+    "lossPots": {}
+  },
+  "events": [
+    {
+      "triggerReference": "1",
+      "isin": "IE00B3F81409",
+      "eventType": "CA_DISTRIBUTIONS",
+      "accountGroupId": "IT000065",
+      "quantity": 100,
+      "dividendPerShare": 1.0,
+      "grossAmount": 100.0,
+      "transactionTimestamp": "2026-06-25T01:00:00+00:00",
+      "valueDate": "2026-06-25"
+    }
+  ],
+  "securityMasterData": [
+    {
+      "isin": "IE00B3F81409",
+      "bankAssetType": "ETF",
+      "productType": "INDEX_FUNDS",
+      "invFundUCITS": "YES",
+      "issuerGroup": "COMPANIES_AND_PRIVATE_INDIVIDUALS",
+      "countryOfOrigin": "IE",
+      "fttRelevance": "NONE"
+    }
+  ],
+  "fundTaxData": [
+    {
+      "isin": "IE00B3F81409",
+      "validFrom": "2026-01-01",
+      "validTo": "2026-06-30",
+      "irrp": 0.5591
+    }
+  ]
+}`;
+
+const SAMPLE_INPUT_CASE_1023 = `{
+  "clientData": {
+    "countryOfTaxResidency": "IT",
+    "accountGroupId": "IT000066",
+    "taxRegime": "AMMINISTRATO"
+  },
+  "clientInitialState": {
+    "year": 2026,
+    "lossPots": {}
+  },
+  "events": [
+    {
+      "triggerReference": "1",
+      "isin": "DE0006289465",
+      "eventType": "CA_DISTRIBUTIONS",
+      "accountGroupId": "IT000066",
+      "quantity": 100,
+      "dividendPerShare": 1.0,
+      "grossAmount": 100.0,
+      "transactionTimestamp": "2026-08-15T01:00:00+00:00",
+      "valueDate": "2026-08-15"
+    }
+  ],
+  "securityMasterData": [
+    {
+      "isin": "DE0006289465",
+      "bankAssetType": "ETF",
+      "productType": "INDEX_FUNDS",
+      "invFundUCITS": "YES",
+      "issuerGroup": "COMPANIES_AND_PRIVATE_INDIVIDUALS",
+      "countryOfOrigin": "DE",
+      "fttRelevance": "NONE"
+    }
+  ],
+  "fundTaxData": [
+    {
+      "isin": "DE0006289465",
+      "validFrom": "2026-07-01",
+      "validTo": "2026-12-31",
+      "irrp": 0.9924
+    }
+  ]
+}`;
+
+const SAMPLE_INPUT_CASE_1024 = `{
+  "clientData": {
+    "countryOfTaxResidency": "IT",
+    "accountGroupId": "IT000064",
+    "taxRegime": "DICHIARATIVO"
+  },
+  "clientInitialState": {
+    "year": 2026,
+    "lossPots": {}
+  },
+  "events": [
+    {
+      "triggerReference": "1",
+      "isin": "IE00B1W57M07",
+      "eventType": "CA_DISTRIBUTIONS",
+      "accountGroupId": "IT000064",
+      "quantity": 100,
+      "dividendPerShare": 2.5,
+      "grossAmount": 250.0,
+      "transactionTimestamp": "2026-07-20T01:00:00+00:00",
+      "valueDate": "2026-07-20"
+    }
+  ],
+  "securityMasterData": [
+    {
+      "isin": "IE00B1W57M07",
+      "bankAssetType": "ETF",
+      "productType": "INDEX_FUNDS",
+      "invFundUCITS": "YES",
+      "issuerGroup": "COMPANIES_AND_PRIVATE_INDIVIDUALS",
+      "countryOfOrigin": "IE",
+      "fttRelevance": "NONE"
+    }
+  ]
+}`;
+
+const SAMPLE_INPUT_CASE_1025 = `{
+  "clientData": {
+    "countryOfTaxResidency": "IT",
+    "accountGroupId": "IT000065",
+    "taxRegime": "DICHIARATIVO"
+  },
+  "clientInitialState": {
+    "year": 2026,
+    "lossPots": {}
+  },
+  "events": [
+    {
+      "triggerReference": "1",
+      "isin": "IE00B3F81409",
+      "eventType": "CA_DISTRIBUTIONS",
+      "accountGroupId": "IT000065",
+      "quantity": 100,
+      "dividendPerShare": 1.0,
+      "grossAmount": 100.0,
+      "transactionTimestamp": "2026-06-25T01:00:00+00:00",
+      "valueDate": "2026-06-25"
+    }
+  ],
+  "securityMasterData": [
+    {
+      "isin": "IE00B3F81409",
+      "bankAssetType": "ETF",
+      "productType": "INDEX_FUNDS",
+      "invFundUCITS": "YES",
+      "issuerGroup": "COMPANIES_AND_PRIVATE_INDIVIDUALS",
+      "countryOfOrigin": "IE",
+      "fttRelevance": "NONE"
+    }
+  ],
+  "fundTaxData": [
+    {
+      "isin": "IE00B3F81409",
+      "validFrom": "2026-01-01",
+      "validTo": "2026-06-30",
+      "irrp": 0.5591
+    }
+  ]
+}`;
+
+const SAMPLE_INPUT_CASE_1026 = `{
+  "clientData": {
+    "countryOfTaxResidency": "IT",
+    "accountGroupId": "IT000066",
+    "taxRegime": "DICHIARATIVO"
+  },
+  "clientInitialState": {
+    "year": 2026,
+    "lossPots": {}
+  },
+  "events": [
+    {
+      "triggerReference": "1",
+      "isin": "DE0006289465",
+      "eventType": "CA_DISTRIBUTIONS",
+      "accountGroupId": "IT000066",
+      "quantity": 100,
+      "dividendPerShare": 1.0,
+      "grossAmount": 100.0,
+      "transactionTimestamp": "2026-08-15T01:00:00+00:00",
+      "valueDate": "2026-08-15"
+    }
+  ],
+  "securityMasterData": [
+    {
+      "isin": "DE0006289465",
+      "bankAssetType": "ETF",
+      "productType": "INDEX_FUNDS",
+      "invFundUCITS": "YES",
+      "issuerGroup": "COMPANIES_AND_PRIVATE_INDIVIDUALS",
+      "countryOfOrigin": "DE",
+      "fttRelevance": "NONE"
+    }
+  ],
+  "fundTaxData": [
+    {
+      "isin": "DE0006289465",
+      "validFrom": "2026-07-01",
+      "validTo": "2026-12-31",
+      "irrp": 0.9924
+    }
+  ]
+}`;
+
 const PRESET_OUTPUTS = {
   "scope7-case711": [
     {
@@ -6114,6 +6363,138 @@ const PRESET_OUTPUTS = {
         "withholdingTaxCredit": 15.0
       }
     }
+  ],
+  "scope10-case1021": [
+    {
+      "triggerReference": "1",
+      "customerStates": {
+        "2026": {
+          "year": 2026,
+          "totalTaxBurden": 65.0,
+          "cumulativeMiscellaneousIncome": 0.0,
+          "cumulativeCapitalIncome": 250.0,
+          "cumulativeProfitLoss": 250.0,
+          "lossPots": {}
+        }
+      },
+      "openPositions": [],
+      "calculation": {
+        "taxAmount": 65.0,
+        "taxRate": 0.26,
+        "capitalIncome": 250.0,
+        "taxableBase": 250.0
+      }
+    }
+  ],
+  "scope10-case1022": [
+    {
+      "triggerReference": "1",
+      "customerStates": {
+        "2026": {
+          "year": 2026,
+          "totalTaxBurden": 18.45,
+          "cumulativeMiscellaneousIncome": 0.0,
+          "cumulativeCapitalIncome": 100.0,
+          "cumulativeProfitLoss": 100.0,
+          "lossPots": {}
+        }
+      },
+      "openPositions": [],
+      "calculation": {
+        "taxAmount": 18.45,
+        "taxRate": 0.1845,
+        "capitalIncome": 100.0,
+        "taxableBase": 70.97
+      }
+    }
+  ],
+  "scope10-case1023": [
+    {
+      "triggerReference": "1",
+      "customerStates": {
+        "2026": {
+          "year": 2026,
+          "totalTaxBurden": 12.6,
+          "cumulativeMiscellaneousIncome": 0.0,
+          "cumulativeCapitalIncome": 100.0,
+          "cumulativeProfitLoss": 100.0,
+          "lossPots": {}
+        }
+      },
+      "openPositions": [],
+      "calculation": {
+        "taxAmount": 12.6,
+        "taxRate": 0.126,
+        "capitalIncome": 100.0,
+        "taxableBase": 48.47
+      }
+    }
+  ],
+  "scope10-case1024": [
+    {
+      "triggerReference": "1",
+      "customerStates": {
+        "2026": {
+          "year": 2026,
+          "totalTaxBurden": 65.0,
+          "cumulativeMiscellaneousIncome": 0.0,
+          "cumulativeCapitalIncome": 250.0,
+          "cumulativeProfitLoss": 250.0,
+          "lossPots": {}
+        }
+      },
+      "openPositions": [],
+      "calculation": {
+        "taxAmount": 65.0,
+        "taxRate": 0.26,
+        "capitalIncome": 250.0,
+        "taxableBase": 250.0
+      }
+    }
+  ],
+  "scope10-case1025": [
+    {
+      "triggerReference": "1",
+      "customerStates": {
+        "2026": {
+          "year": 2026,
+          "totalTaxBurden": 18.45,
+          "cumulativeMiscellaneousIncome": 0.0,
+          "cumulativeCapitalIncome": 100.0,
+          "cumulativeProfitLoss": 100.0,
+          "lossPots": {}
+        }
+      },
+      "openPositions": [],
+      "calculation": {
+        "taxAmount": 18.45,
+        "taxRate": 0.1845,
+        "capitalIncome": 100.0,
+        "taxableBase": 70.97
+      }
+    }
+  ],
+  "scope10-case1026": [
+    {
+      "triggerReference": "1",
+      "customerStates": {
+        "2026": {
+          "year": 2026,
+          "totalTaxBurden": 12.6,
+          "cumulativeMiscellaneousIncome": 0.0,
+          "cumulativeCapitalIncome": 100.0,
+          "cumulativeProfitLoss": 100.0,
+          "lossPots": {}
+        }
+      },
+      "openPositions": [],
+      "calculation": {
+        "taxAmount": 12.6,
+        "taxRate": 0.126,
+        "capitalIncome": 100.0,
+        "taxableBase": 48.47
+      }
+    }
   ]
 };
 
@@ -6590,6 +6971,42 @@ const CASES = {
     description: "Foreign dividend payment in dichiarativo (netto frontiera).",
     tags: ["DICHIARATIVO", "Dividend", "Foreign", "Netto frontiera"],
     sample: SAMPLE_INPUT_CASE_1014,
+  },
+  "scope10-case1021": {
+    label: "Scope 10 - Case 10.2.1",
+    description: "ETF dividend payment base case with IRRP 0%.",
+    tags: ["AMMINISTRATO", "ETF", "Dividend", "IRRP 0%"],
+    sample: SAMPLE_INPUT_CASE_1021,
+  },
+  "scope10-case1022": {
+    label: "Scope 10 - Case 10.2.2",
+    description: "ETF dividend payment with IRRP 55.91%.",
+    tags: ["AMMINISTRATO", "ETF", "Dividend", "IRRP"],
+    sample: SAMPLE_INPUT_CASE_1022,
+  },
+  "scope10-case1023": {
+    label: "Scope 10 - Case 10.2.3",
+    description: "German bond ETF dividend with IRRP 99.24%.",
+    tags: ["AMMINISTRATO", "ETF", "Dividend", "Bond ETF"],
+    sample: SAMPLE_INPUT_CASE_1023,
+  },
+  "scope10-case1024": {
+    label: "Scope 10 - Case 10.2.4",
+    description: "ETF dividend payment base case (dichiarativo, withheld).",
+    tags: ["DICHIARATIVO", "ETF", "Dividend", "IRRP 0%"],
+    sample: SAMPLE_INPUT_CASE_1024,
+  },
+  "scope10-case1025": {
+    label: "Scope 10 - Case 10.2.5",
+    description: "ETF dividend payment with IRRP 55.91% (dichiarativo).",
+    tags: ["DICHIARATIVO", "ETF", "Dividend", "IRRP"],
+    sample: SAMPLE_INPUT_CASE_1025,
+  },
+  "scope10-case1026": {
+    label: "Scope 10 - Case 10.2.6",
+    description: "German bond ETF dividend with IRRP 99.24% (dichiarativo).",
+    tags: ["DICHIARATIVO", "ETF", "Dividend", "Bond ETF"],
+    sample: SAMPLE_INPUT_CASE_1026,
   },
 };
 
