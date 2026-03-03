@@ -4412,6 +4412,81 @@ const SAMPLE_INPUT_CASE_913 = `{
   ]
 }`;
 
+
+const SAMPLE_INPUT_CASE_921 = `{
+  "clientData": {
+    "countryOfTaxResidency": "IT",
+    "accountGroupId": "IT_LIQ_002",
+    "taxRegime": "AMMINISTRATO"
+  },
+  "clientInitialState": {
+    "year": 2026,
+    "lossPots": {}
+  },
+  "events": [
+    {
+      "triggerReference": "1",
+      "isin": "-",
+      "eventType": "CASH_INTEREST_PAYMENT",
+      "accountGroupId": "IT_LIQ_002",
+      "grossAmount": 10.0,
+      "unitPrice": 10.0,
+      "quantity": 1,
+      "fee": 0.0,
+      "transactionTimestamp": "2026-06-30T01:00:00+00:00",
+      "valueDate": "2026-06-30"
+    }
+  ],
+  "securityMasterData": [
+    {
+      "isin": "-",
+      "bankAssetType": "CASH",
+      "productType": "BANK_DEPOSIT",
+      "invFundUCITS": "NO",
+      "issuerGroup": "CREDIT_INSTITUTION",
+      "countryOfOrigin": "DE",
+      "fttRelevance": "NONE"
+    }
+  ]
+}`;
+
+const SAMPLE_INPUT_CASE_922 = `{
+  "clientData": {
+    "countryOfTaxResidency": "IT",
+    "accountGroupId": "IT_LIQ_003",
+    "taxRegime": "DICHIARATIVO"
+  },
+  "clientInitialState": {
+    "year": 2026,
+    "lossPots": {}
+  },
+  "events": [
+    {
+      "triggerReference": "1",
+      "isin": "-",
+      "eventType": "CASH_INTEREST_PAYMENT",
+      "accountGroupId": "IT_LIQ_003",
+      "grossAmount": 10.0,
+      "unitPrice": 10.0,
+      "quantity": 1,
+      "fee": 0.0,
+      "transactionTimestamp": "2026-06-30T01:00:00+00:00",
+      "valueDate": "2026-06-30"
+    }
+  ],
+  "securityMasterData": [
+    {
+      "isin": "-",
+      "bankAssetType": "CASH",
+      "productType": "BANK_DEPOSIT",
+      "invFundUCITS": "NO",
+      "issuerGroup": "CREDIT_INSTITUTION",
+      "countryOfOrigin": "DE",
+      "fttRelevance": "NONE"
+    }
+  ]
+}`;
+
 const PRESET_OUTPUTS = {
   "scope7-case711": [
     {
@@ -5759,6 +5834,51 @@ const PRESET_OUTPUTS = {
         "taxableBase": 99.64
       }
     }
+
+  ],
+  "scope9-case921": [
+    {
+      "triggerReference": "1",
+      "customerStates": {
+        "2026": {
+          "year": 2026,
+          "totalTaxBurden": 2.6,
+          "cumulativeMiscellaneousIncome": 0.0,
+          "cumulativeCapitalIncome": 10.0,
+          "cumulativeProfitLoss": 10.0,
+          "lossPots": {}
+        }
+      },
+      "openPositions": [],
+      "calculation": {
+        "taxAmount": 2.6,
+        "taxRate": 0.26,
+        "capitalIncome": 10.0,
+        "taxableBase": 10.0
+      }
+    }
+  ],
+  "scope9-case922": [
+    {
+      "triggerReference": "1",
+      "customerStates": {
+        "2026": {
+          "year": 2026,
+          "cumulativeMiscellaneousIncome": 0.0,
+          "cumulativeCapitalIncome": 10.0,
+          "cumulativeProfitLoss": 10.0,
+          "clientFiscalDebt": 2.6,
+          "lossPots": {}
+        }
+      },
+      "openPositions": [],
+      "calculation": {
+        "taxAmount": 0.0,
+        "taxRate": 0.26,
+        "capitalIncome": 10.0,
+        "taxableBase": 10.0
+      }
+    }
   ]
 };
 
@@ -6199,6 +6319,18 @@ const CASES = {
     description: "Liquidity fund cash distribution with low IRRP (JPM LVNAV).",
     tags: ["AMMINISTRATO", "Cash sweep", "MMF", "IRRP"],
     sample: SAMPLE_INPUT_CASE_913,
+  },
+  "scope9-case921": {
+    label: "Scope 9 - Case 9.2.1",
+    description: "Trustee cash interest taxed at flat 26% in amministrato.",
+    tags: ["AMMINISTRATO", "Cash interest", "Bank deposit", "Trustee"],
+    sample: SAMPLE_INPUT_CASE_921,
+  },
+  "scope9-case922": {
+    label: "Scope 9 - Case 9.2.2",
+    description: "Trustee cash interest in dichiarativo with fiscal debt.",
+    tags: ["DICHIARATIVO", "Cash interest", "Bank deposit", "Trustee"],
+    sample: SAMPLE_INPUT_CASE_922,
   },
 };
 
