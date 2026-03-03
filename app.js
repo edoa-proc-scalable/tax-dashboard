@@ -4283,6 +4283,135 @@ const SAMPLE_INPUT_CASE_832 = `{
   ]
 }`;
 
+
+const SAMPLE_INPUT_CASE_911 = `{
+  "clientData": {
+    "countryOfTaxResidency": "IT",
+    "accountGroupId": "IT_LIQ_001",
+    "taxRegime": "AMMINISTRATO"
+  },
+  "clientInitialState": {
+    "year": 2026,
+    "lossPots": {}
+  },
+  "events": [
+    {
+      "triggerReference": "1",
+      "isin": "IE000GWTNRJ7",
+      "eventType": "DIST_CASH_DIV",
+      "accountGroupId": "IT_LIQ_001",
+      "grossAmount": 100.0,
+      "transactionTimestamp": "2026-04-30T01:00:00+00:00",
+      "valueDate": "2026-04-30"
+    }
+  ],
+  "securityMasterData": [
+    {
+      "isin": "IE000GWTNRJ7",
+      "bankAssetType": "FDS",
+      "productType": "SECURITIES_FUNDS",
+      "invFundUCITS": "YES",
+      "issuerGroup": "COMPANIES_AND_PRIVATE_INDIVIDUALS",
+      "countryOfOrigin": "IE",
+      "whiteListStatus": "ELIGIBLE",
+      "fttRelevance": "NONE"
+    }
+  ],
+  "fundTaxData": [
+    {
+      "isin": "IE000GWTNRJ7",
+      "validFrom": "2026-01-01",
+      "validTo": "2026-06-30",
+      "irrp": 0.0519
+    }
+  ]
+}`;
+
+const SAMPLE_INPUT_CASE_912 = `{
+  "clientData": {
+    "countryOfTaxResidency": "IT",
+    "accountGroupId": "IT_LIQ_002",
+    "taxRegime": "AMMINISTRATO"
+  },
+  "clientInitialState": {
+    "year": 2026,
+    "lossPots": {}
+  },
+  "events": [
+    {
+      "triggerReference": "1",
+      "isin": "IE0008643037",
+      "eventType": "DIST_CASH_DIV",
+      "accountGroupId": "IT_LIQ_002",
+      "grossAmount": 100.0,
+      "transactionTimestamp": "2026-04-30T01:00:00+00:00",
+      "valueDate": "2026-04-30",
+      "comment": "IRRP exists but is outside the validity window for this value date."
+    }
+  ],
+  "securityMasterData": [
+    {
+      "isin": "IE0008643037",
+      "bankAssetType": "FDS",
+      "productType": "SECURITIES_FUNDS",
+      "invFundUCITS": "YES",
+      "issuerGroup": "COMPANIES_AND_PRIVATE_INDIVIDUALS",
+      "countryOfOrigin": "IE",
+      "fttRelevance": "NONE"
+    }
+  ],
+  "fundTaxData": [
+    {
+      "isin": "IE0008643037",
+      "validFrom": "2025-07-01",
+      "validTo": "2025-12-31",
+      "irrp": 0.012
+    }
+  ]
+}`;
+
+const SAMPLE_INPUT_CASE_913 = `{
+  "clientData": {
+    "countryOfTaxResidency": "IT",
+    "accountGroupId": "IT_LIQ_001",
+    "taxRegime": "AMMINISTRATO"
+  },
+  "clientInitialState": {
+    "year": 2026,
+    "lossPots": {}
+  },
+  "events": [
+    {
+      "triggerReference": "1",
+      "isin": "LU2599140782",
+      "eventType": "DIST_CASH_DIV",
+      "accountGroupId": "IT_LIQ_001",
+      "grossAmount": 100.0,
+      "transactionTimestamp": "2026-04-30T01:00:00+00:00",
+      "valueDate": "2026-04-30"
+    }
+  ],
+  "securityMasterData": [
+    {
+      "isin": "LU2599140782",
+      "bankAssetType": "FDS",
+      "productType": "SECURITIES_FUNDS",
+      "invFundUCITS": "YES",
+      "issuerGroup": "COMPANIES_AND_PRIVATE_INDIVIDUALS",
+      "countryOfOrigin": "LU",
+      "fttRelevance": "NONE"
+    }
+  ],
+  "fundTaxData": [
+    {
+      "isin": "LU2599140782",
+      "validFrom": "2026-01-01",
+      "validTo": "2026-06-30",
+      "irrp": 0.0069
+    }
+  ]
+}`;
+
 const PRESET_OUTPUTS = {
   "scope7-case711": [
     {
@@ -5564,6 +5693,72 @@ const PRESET_OUTPUTS = {
         "priceIn": 10.0
       }
     }
+  ],
+  "scope9-case911": [
+    {
+      "triggerReference": "1",
+      "customerStates": {
+        "2026": {
+          "year": 2026,
+          "totalTaxBurden": 25.3,
+          "cumulativeMiscellaneousIncome": 0.0,
+          "cumulativeCapitalIncome": 100.0,
+          "cumulativeProfitLoss": 100.0,
+          "lossPots": {}
+        }
+      },
+      "openPositions": [],
+      "calculation": {
+        "taxAmount": 25.3,
+        "taxRate": 0.253,
+        "capitalIncome": 100.0,
+        "taxableBase": 97.31
+      }
+    }
+  ],
+  "scope9-case912": [
+    {
+      "triggerReference": "1",
+      "customerStates": {
+        "2026": {
+          "year": 2026,
+          "totalTaxBurden": 26.0,
+          "cumulativeMiscellaneousIncome": 0.0,
+          "cumulativeCapitalIncome": 100.0,
+          "cumulativeProfitLoss": 100.0,
+          "lossPots": {}
+        }
+      },
+      "openPositions": [],
+      "calculation": {
+        "taxAmount": 26.0,
+        "taxRate": 0.26,
+        "capitalIncome": 100.0,
+        "taxableBase": 100.0
+      }
+    }
+  ],
+  "scope9-case913": [
+    {
+      "triggerReference": "1",
+      "customerStates": {
+        "2026": {
+          "year": 2026,
+          "totalTaxBurden": 25.91,
+          "cumulativeMiscellaneousIncome": 0.0,
+          "cumulativeCapitalIncome": 100.0,
+          "cumulativeProfitLoss": 100.0,
+          "lossPots": {}
+        }
+      },
+      "openPositions": [],
+      "calculation": {
+        "taxAmount": 25.91,
+        "taxRate": 0.2591,
+        "capitalIncome": 100.0,
+        "taxableBase": 99.64
+      }
+    }
   ]
 };
 
@@ -5987,6 +6182,24 @@ const CASES = {
     tags: ["AMMINISTRATO", "Reversal", "Year boundary", "Correction"],
     sample: SAMPLE_INPUT_CASE_832,
   },
+  "scope9-case911": {
+    label: "Scope 9 - Case 9.1.1",
+    description: "Liquidity fund cash distribution with valid IRRP for H1 2026.",
+    tags: ["AMMINISTRATO", "Cash sweep", "MMF", "IRRP"],
+    sample: SAMPLE_INPUT_CASE_911,
+  },
+  "scope9-case912": {
+    label: "Scope 9 - Case 9.1.2",
+    description: "Liquidity fund cash distribution with IRRP not found on value date.",
+    tags: ["AMMINISTRATO", "Cash sweep", "MMF", "No IRRP"],
+    sample: SAMPLE_INPUT_CASE_912,
+  },
+  "scope9-case913": {
+    label: "Scope 9 - Case 9.1.3",
+    description: "Liquidity fund cash distribution with low IRRP (JPM LVNAV).",
+    tags: ["AMMINISTRATO", "Cash sweep", "MMF", "IRRP"],
+    sample: SAMPLE_INPUT_CASE_913,
+  },
 };
 
 const setCaseUI = (caseId, { loadSample } = { loadSample: false }) => {
@@ -6061,6 +6274,7 @@ const SCOPE_SUBTITLES = {
   scope6: "scope_06_iftt",
   scope7: "scope_07_short_selling",
   scope8: "scope_08_reversals",
+  scope9: "scope_09_interest_on_cash_balance",
 };
 
 const getScopeNumber = (scopeId) => {
