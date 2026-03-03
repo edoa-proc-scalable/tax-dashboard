@@ -3650,6 +3650,7 @@ const inputEl = document.getElementById("inputJson");
 const outputEl = document.getElementById("outputJson");
 const errorBox = document.getElementById("errorBox");
 const scopeList = document.getElementById("scopeList");
+const caseSelect = document.getElementById("caseSelect");
 const caseDescription = document.getElementById("caseDescription");
 const caseTags = document.getElementById("caseTags");
 const caseTitle = document.getElementById("caseTitle");
@@ -4014,6 +4015,10 @@ const setSelectedCaseButton = (caseId) => {
   buttons.forEach((btn) => {
     btn.classList.toggle("is-selected", btn.dataset.caseId === caseId);
   });
+
+  if (caseSelect && caseSelect.value !== caseId) {
+    caseSelect.value = caseId;
+  }
 };
 
 const normalizeCaseLabel = (label) => {
@@ -4021,30 +4026,152 @@ const normalizeCaseLabel = (label) => {
   return label.replace(/^Scope\s+\d+\s*-\s*/i, "");
 };
 
-const hydrateCaseSelector = () => {
-  const buttons = document.querySelectorAll(".case-item");
-  buttons.forEach((btn) => {
-    const caseId = btn.dataset.caseId;
-    const caseData = CASES[caseId] || null;
+const SCOPE_SUBTITLES = {
+  scope1: "scope_01_base_formula",
+  scope2: "scope_02_existing_loss_pot",
+  scope3: "scope_03_precision_and_rounding",
+  scope4: "scope_04_income_events",
+  scope5: "scope_05_whitelist_etf",
+  scope6: "scope_06_iftt",
+  scope7: "scope_07_short_selling",
+};
 
-    let titleEl = btn.querySelector(".case-title");
-    if (!titleEl) {
-      titleEl = document.createElement("span");
-      titleEl.className = "case-title";
-      btn.prepend(titleEl);
-    }
+const getScopeNumber = (scopeId) => {
+  const match = /^scope(\d+)$/i.exec(scopeId || "");
+  return match ? Number(match[1]) : Number.MAX_SAFE_INTEGER;
+};
 
-    let descEl = btn.querySelector(".case-desc");
-    if (!descEl) {
-      descEl = document.createElement("span");
-      descEl.className = "case-desc";
-      btn.appendChild(descEl);
-    }
+const getCaseSortKey = (caseData, caseId) => {
+  const match = /Case\s+([0-9]+(?:\.[0-9A-Za-z]+)*)/i.exec(caseData?.label || "");
+  return (match && match[1]) || caseId;
+};
 
-    const readableLabel = caseData ? normalizeCaseLabel(caseData.label) : "Case";
-    titleEl.textContent = `${caseId} - ${readableLabel}`;
-    descEl.textContent = caseData?.description || "No description available.";
-    btn.setAttribute("title", `${caseId} - ${caseData?.label || "Unknown case"}`);
+const compareCaseEntries = ([idA, dataA], [idB, dataB]) => {
+  const keyA = getCaseSortKey(dataA, idA).split(".");
+  const keyB = getCaseSortKey(dataB, idB).split(".");
+  const maxLen = Math.max(keyA.length, keyB.length);
+
+  for (let i = 0; i < maxLen; i += 1) {
+    const partA = keyA[i] ?? "";
+    const partB = keyB[i] ?? "";
+    const numA = Number(partA);
+    const numB = Number(partB);
+
+    const aIsNum = !Number.isNaN(numA);
+    const bIsNum = !Number.isNaN(numB);
+
+    if (aIsNum && bIsNum && numA !== numB) return numA - numB;
+    if (partA !== partB) return String(partA).localeCompare(String(partB));
+  }
+
+  return idA.localeCompare(idB);
+};
+
+const getScopeEntries = () => {
+  const grouped = new Map();
+  Object.entries(CASES).forEach(([caseId, caseData]) => {
+    const scopeId = String(caseId).split("-")[0];
+    if (!grouped.has(scopeId)) grouped.set(scopeId, []);
+    grouped.get(scopeId).push([caseId, caseData]);
+  });
+
+  return Array.from(grouped.entries())
+    .sort(([scopeA], [scopeB]) => getScopeNumber(scopeA) - getScopeNumber(scopeB))
+    .map(([scopeId, entries]) => [scopeId, entries.sort(compareCaseEntries)]);
+};
+
+const populateCaseSelect = () => {
+  if (!caseSelect) return;
+
+  caseSelect.innerHTML = "";
+
+  getScopeEntries().forEach(([scopeId, entries]) => {
+    const scopeNumber = getScopeNumber(scopeId);
+    const subtitle = SCOPE_SUBTITLES[scopeId] || scopeId;
+    const optGroup = document.createElement("optgroup");
+    optGroup.label = Number.isFinite(scopeNumber)
+      ? `Scope ${scopeNumber} - ${subtitle}`
+      : scopeId;
+
+    entries.forEach(([caseId, caseData]) => {
+      const option = document.createElement("option");
+      option.value = caseId;
+      option.textContent = `${caseId} - ${normalizeCaseLabel(caseData?.label || caseId)}`;
+      optGroup.appendChild(option);
+    });
+
+    caseSelect.appendChild(optGroup);
+  });
+
+  caseSelect.value = currentCaseId;
+};
+
+const buildScopeList = () => {
+  if (!scopeList) return;
+
+  scopeList.innerHTML = "";
+
+  getScopeEntries().forEach(([scopeId, entries]) => {
+    const scopeNumber = getScopeNumber(scopeId);
+    const scopeGroup = document.createElement("div");
+    scopeGroup.className = "scope-group";
+
+    const toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = "scope-toggle";
+    toggle.dataset.scope = scopeId;
+    toggle.setAttribute("aria-expanded", "false");
+
+    const meta = document.createElement("span");
+    meta.className = "scope-meta";
+
+    const title = document.createElement("span");
+    title.className = "scope-title";
+    title.textContent = Number.isFinite(scopeNumber) ? `Scope ${scopeNumber}` : scopeId;
+
+    const subtitle = document.createElement("span");
+    subtitle.className = "scope-subtitle";
+    subtitle.textContent = SCOPE_SUBTITLES[scopeId] || scopeId;
+
+    const chevron = document.createElement("span");
+    chevron.className = "chevron";
+    chevron.setAttribute("aria-hidden", "true");
+
+    meta.appendChild(title);
+    meta.appendChild(subtitle);
+    toggle.appendChild(meta);
+    toggle.appendChild(chevron);
+
+    const panel = document.createElement("div");
+    panel.className = "scope-cases";
+    panel.dataset.scopeCases = scopeId;
+    panel.hidden = true;
+
+    entries.forEach(([caseId, caseData]) => {
+      const readableLabel = normalizeCaseLabel(caseData?.label || caseId);
+
+      const caseButton = document.createElement("button");
+      caseButton.type = "button";
+      caseButton.className = "case-item";
+      caseButton.dataset.caseId = caseId;
+      caseButton.title = `${caseId} - ${readableLabel}`;
+
+      const caseTitle = document.createElement("span");
+      caseTitle.className = "case-title";
+      caseTitle.textContent = `${caseId} - ${readableLabel}`;
+
+      const caseDesc = document.createElement("span");
+      caseDesc.className = "case-desc";
+      caseDesc.textContent = caseData?.description || "No description available.";
+
+      caseButton.appendChild(caseTitle);
+      caseButton.appendChild(caseDesc);
+      panel.appendChild(caseButton);
+    });
+
+    scopeGroup.appendChild(toggle);
+    scopeGroup.appendChild(panel);
+    scopeList.appendChild(scopeGroup);
   });
 };
 
@@ -4071,7 +4198,8 @@ const openScopeForCase = (caseId) => {
   if (scopeId) openScope(scopeId, true);
 };
 
-hydrateCaseSelector();
+populateCaseSelect();
+buildScopeList();
 setSelectedCaseButton(currentCaseId);
 openScopeForCase(currentCaseId);
 
@@ -5051,6 +5179,19 @@ if (scopeList) {
       openScopeForCase(caseId);
       compute();
     }
+  });
+}
+
+if (caseSelect) {
+  caseSelect.addEventListener("change", (event) => {
+    const caseId = event.target.value;
+    if (!caseId || !CASES[caseId]) return;
+
+    currentCaseId = caseId;
+    setCaseUI(caseId, { loadSample: true });
+    setSelectedCaseButton(caseId);
+    openScopeForCase(caseId);
+    compute();
   });
 }
 
