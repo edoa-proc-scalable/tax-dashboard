@@ -4026,6 +4026,29 @@ const normalizeCaseLabel = (label) => {
   return label.replace(/^Scope\s+\d+\s*-\s*/i, "");
 };
 
+const getCaseCode = (label, fallback = "") => {
+  const match = /Case\s+([0-9]+(?:\.[0-9A-Za-z]+)*)/i.exec(label || "");
+  if (match) return `Case ${match[1]}`;
+
+  const fallbackMatch = /case([0-9a-z]+)/i.exec(fallback || "");
+  return fallbackMatch ? `Case ${fallbackMatch[1]}` : "Case";
+};
+
+const summarizeDescription = (description) => {
+  if (!description) return "Scenario";
+  const firstSentence = String(description).split(".")[0].trim();
+  if (!firstSentence) return "Scenario";
+  return firstSentence.length > 56
+    ? `${firstSentence.slice(0, 53).trim()}...`
+    : firstSentence;
+};
+
+const formatScopeSubtitle = (scopeId) => {
+  const raw = SCOPE_SUBTITLES[scopeId] || scopeId;
+  const cleaned = String(raw).replace(/^scope_\d+_/, "").replace(/_/g, " ").trim();
+  return cleaned.replace(/\b\w/g, (char) => char.toUpperCase());
+};
+
 const SCOPE_SUBTITLES = {
   scope1: "scope_01_base_formula",
   scope2: "scope_02_existing_loss_pot",
@@ -4087,16 +4110,15 @@ const populateCaseSelect = () => {
 
   getScopeEntries().forEach(([scopeId, entries]) => {
     const scopeNumber = getScopeNumber(scopeId);
-    const subtitle = SCOPE_SUBTITLES[scopeId] || scopeId;
     const optGroup = document.createElement("optgroup");
     optGroup.label = Number.isFinite(scopeNumber)
-      ? `Scope ${scopeNumber} - ${subtitle}`
-      : scopeId;
+      ? `Scope ${scopeNumber} - ${formatScopeSubtitle(scopeId)}`
+      : formatScopeSubtitle(scopeId);
 
     entries.forEach(([caseId, caseData]) => {
       const option = document.createElement("option");
       option.value = caseId;
-      option.textContent = `${caseId} - ${normalizeCaseLabel(caseData?.label || caseId)}`;
+      option.textContent = `${getCaseCode(caseData?.label, caseId)} - ${summarizeDescription(caseData?.description)}`;
       optGroup.appendChild(option);
     });
 
