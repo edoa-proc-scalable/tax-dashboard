@@ -4151,6 +4151,138 @@ const SAMPLE_INPUT_CASE_824 = `{
   ]
 }`;
 
+
+const SAMPLE_INPUT_CASE_831 = `{
+  "clientData": {
+    "countryOfTaxResidency": "IT",
+    "accountGroupId": "IT000531",
+    "taxRegime": "AMMINISTRATO"
+  },
+  "clientInitialState": {
+    "year": 2026,
+    "lossPots": {
+      "2026": 300.0
+    }
+  },
+  "events": [
+    {
+      "triggerReference": "1",
+      "isin": "IT0004967292",
+      "eventType": "INSTRUMENT_BUY",
+      "quantity": 100,
+      "unitPrice": 10.0,
+      "accountGroupId": "IT000531",
+      "fee": 0.0,
+      "transactionTimestamp": "2026-03-01T03:00:00+00:00",
+      "valueDate": "2026-03-01"
+    },
+    {
+      "triggerReference": "2",
+      "isin": "IT0004967292",
+      "eventType": "INSTRUMENT_SELL",
+      "quantity": 100,
+      "unitPrice": 13.0,
+      "accountGroupId": "IT000531",
+      "fee": 0.0,
+      "transactionTimestamp": "2026-04-01T03:00:00+00:00",
+      "valueDate": "2026-04-01"
+    },
+    {
+      "triggerReference": "3",
+      "isin": "IT0004967292",
+      "eventType": "REVERSAL",
+      "quantity": 100,
+      "unitPrice": 13.0,
+      "accountGroupId": "IT000531",
+      "fee": 0.0,
+      "correctedTriggerReference": "2",
+      "transactionTimestamp": "2026-04-04T03:00:00+00:00",
+      "valueDate": "2026-04-04"
+    }
+  ],
+  "securityMasterData": [
+    {
+      "isin": "IT0004967292",
+      "bankAssetType": "SHR",
+      "productType": "ORDINARY_SHARES",
+      "invFundUCITS": "NO",
+      "issuerGroup": "COMPANIES_AND_PRIVATE_INDIVIDUALS",
+      "countryOfOrigin": "IT",
+      "fttRelevance": "NONE"
+    }
+  ]
+}`;
+
+const SAMPLE_INPUT_CASE_832 = `{
+  "clientData": {
+    "countryOfTaxResidency": "IT",
+    "accountGroupId": "IT000532",
+    "taxRegime": "AMMINISTRATO"
+  },
+  "clientInitialState": {
+    "year": 2026,
+    "lossPots": {}
+  },
+  "events": [
+    {
+      "triggerReference": "1",
+      "isin": "IT0004967292",
+      "eventType": "INSTRUMENT_BUY",
+      "quantity": 100,
+      "unitPrice": 10.0,
+      "accountGroupId": "IT000532",
+      "fee": 0.0,
+      "transactionTimestamp": "2026-12-20T03:00:00+00:00",
+      "valueDate": "2026-12-20"
+    },
+    {
+      "triggerReference": "2",
+      "isin": "IT0004967292",
+      "eventType": "INSTRUMENT_SELL",
+      "quantity": 100,
+      "unitPrice": 15.0,
+      "accountGroupId": "IT000532",
+      "fee": 0.0,
+      "transactionTimestamp": "2026-12-29T03:00:00+00:00",
+      "valueDate": "2026-12-29"
+    },
+    {
+      "triggerReference": "3",
+      "isin": "IT0004967292",
+      "eventType": "REVERSAL",
+      "quantity": 100,
+      "unitPrice": 15.0,
+      "accountGroupId": "IT000532",
+      "fee": 0.0,
+      "correctedTriggerReference": "2",
+      "transactionTimestamp": "2027-01-03T03:00:00+00:00",
+      "valueDate": "2027-01-03"
+    },
+    {
+      "triggerReference": "4",
+      "isin": "IT0004967292",
+      "eventType": "INSTRUMENT_SELL",
+      "quantity": 100,
+      "unitPrice": 12.0,
+      "accountGroupId": "IT000532",
+      "fee": 0.0,
+      "transactionTimestamp": "2027-01-03T03:00:00+00:00",
+      "valueDate": "2027-01-03"
+    }
+  ],
+  "securityMasterData": [
+    {
+      "isin": "IT0004967292",
+      "bankAssetType": "SHR",
+      "productType": "ORDINARY_SHARES",
+      "invFundUCITS": "NO",
+      "issuerGroup": "COMPANIES_AND_PRIVATE_INDIVIDUALS",
+      "countryOfOrigin": "IT",
+      "fttRelevance": "NONE"
+    }
+  ]
+}`;
+
 const PRESET_OUTPUTS = {
   "scope7-case711": [
     {
@@ -5248,6 +5380,190 @@ const PRESET_OUTPUTS = {
         "priceIn": 10.0
       }
     }
+  ],
+  "scope8-case831": [
+    {
+      "triggerReference": "1",
+      "customerStates": {
+        "2026": {
+          "year": 2026,
+          "lossPots": {
+            "2026": 300.0
+          }
+        }
+      },
+      "openPositions": [
+        {
+          "securityId": "IT0004967292",
+          "accountGroupId": "IT000531",
+          "transactionTimestamp": "2026-03-01T03:00:00+00:00",
+          "openNominal": 100.0,
+          "openAmount": -1000.0
+        }
+      ],
+      "calculation": {}
+    },
+    {
+      "triggerReference": "2",
+      "customerStates": {
+        "2026": {
+          "year": 2026,
+          "totalTaxBurden": 0.0,
+          "cumulativeMiscellaneousIncome": 300.0,
+          "cumulativeCapitalIncome": 0.0,
+          "cumulativeProfitLoss": 300.0,
+          "lossPots": {}
+        }
+      },
+      "openPositions": [],
+      "calculation": {
+        "taxAmount": 0.0,
+        "taxRate": 0.26,
+        "gainOrLoss": 300.0,
+        "taxableBase": 0.0,
+        "balance": 0.0,
+        "priceIn": 10.0
+      }
+    },
+    {
+      "triggerReference": "3",
+      "customerStates": {
+        "2026": {
+          "year": 2026,
+          "totalTaxBurden": 0.0,
+          "cumulativeMiscellaneousIncome": 0.0,
+          "cumulativeCapitalIncome": 0.0,
+          "cumulativeProfitLoss": 0.0,
+          "lossPots": {
+            "2026": 300.0
+          }
+        }
+      },
+      "openPositions": [
+        {
+          "securityId": "IT0004967292",
+          "accountGroupId": "IT000531",
+          "transactionTimestamp": "2026-03-01T03:00:00+00:00",
+          "openNominal": 100.0,
+          "openAmount": -1000.0
+        }
+      ],
+      "calculation": {
+        "taxAmount": 0.0,
+        "taxRate": 0.26,
+        "gainOrLoss": -300.0,
+        "taxableBase": 0.0,
+        "balance": 0.0,
+        "priceIn": 10.0
+      }
+    }
+  ],
+  "scope8-case832": [
+    {
+      "triggerReference": "1",
+      "customerStates": {
+        "2026": {
+          "year": 2026,
+          "lossPots": {}
+        }
+      },
+      "openPositions": [
+        {
+          "securityId": "IT0004967292",
+          "accountGroupId": "IT000532",
+          "transactionTimestamp": "2026-12-20T03:00:00+00:00",
+          "openNominal": 100.0,
+          "openAmount": -1000.0
+        }
+      ],
+      "calculation": {}
+    },
+    {
+      "triggerReference": "2",
+      "customerStates": {
+        "2026": {
+          "year": 2026,
+          "totalTaxBurden": 130.0,
+          "cumulativeMiscellaneousIncome": 500.0,
+          "cumulativeCapitalIncome": 0.0,
+          "cumulativeProfitLoss": 500.0,
+          "lossPots": {}
+        }
+      },
+      "openPositions": [],
+      "calculation": {
+        "taxAmount": 130.0,
+        "taxRate": 0.26,
+        "gainOrLoss": 500.0,
+        "taxableBase": 500.0,
+        "balance": 0.0,
+        "priceIn": 10.0
+      }
+    },
+    {
+      "triggerReference": "3",
+      "customerStates": {
+        "2026": {
+          "year": 2026,
+          "totalTaxBurden": 0.0,
+          "cumulativeMiscellaneousIncome": 0.0,
+          "cumulativeCapitalIncome": 0.0,
+          "cumulativeProfitLoss": 0.0,
+          "lossPots": {}
+        },
+        "2027": {
+          "year": 2027,
+          "lossPots": {}
+        }
+      },
+      "openPositions": [
+        {
+          "securityId": "IT0004967292",
+          "accountGroupId": "IT000532",
+          "transactionTimestamp": "2026-12-20T03:00:00+00:00",
+          "openNominal": 100.0,
+          "openAmount": -1000.0
+        }
+      ],
+      "calculation": {
+        "taxAmount": -130.0,
+        "taxRate": 0.26,
+        "gainOrLoss": -500.0,
+        "taxableBase": -500.0,
+        "balance": 0.0,
+        "priceIn": 10.0
+      }
+    },
+    {
+      "triggerReference": "4",
+      "customerStates": {
+        "2026": {
+          "year": 2026,
+          "totalTaxBurden": 0.0,
+          "cumulativeMiscellaneousIncome": 0.0,
+          "cumulativeCapitalIncome": 0.0,
+          "cumulativeProfitLoss": 0.0,
+          "lossPots": {}
+        },
+        "2027": {
+          "year": 2027,
+          "totalTaxBurden": 52.0,
+          "cumulativeMiscellaneousIncome": 200.0,
+          "cumulativeCapitalIncome": 0.0,
+          "cumulativeProfitLoss": 200.0,
+          "lossPots": {}
+        }
+      },
+      "openPositions": [],
+      "calculation": {
+        "taxAmount": 52.0,
+        "taxRate": 0.26,
+        "gainOrLoss": 200.0,
+        "taxableBase": 200.0,
+        "balance": 0.0,
+        "priceIn": 10.0
+      }
+    }
   ]
 };
 
@@ -5658,6 +5974,18 @@ const CASES = {
     description: "Dichiarativo reversal with corrected loss sell for reporting.",
     tags: ["DICHIARATIVO", "Reversal", "Correction", "Loss"],
     sample: SAMPLE_INPUT_CASE_824,
+  },
+  "scope8-case831": {
+    label: "Scope 8 - Case 8.3.1",
+    description: "Reversal restores a loss pot previously consumed by gain offset.",
+    tags: ["AMMINISTRATO", "Reversal", "Loss pot", "Offset restore"],
+    sample: SAMPLE_INPUT_CASE_831,
+  },
+  "scope8-case832": {
+    label: "Scope 8 - Case 8.3.2",
+    description: "Reversal and correction across year boundary (Dec/Jan).",
+    tags: ["AMMINISTRATO", "Reversal", "Year boundary", "Correction"],
+    sample: SAMPLE_INPUT_CASE_832,
   },
 };
 
