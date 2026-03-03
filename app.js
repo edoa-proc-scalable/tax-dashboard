@@ -5326,7 +5326,7 @@ const renderTable = (events, outputs) => {
     refCell.textContent = entry.triggerReference || event.triggerReference || "--";
 
     const eventTypeCell = document.createElement("td");
-    eventTypeCell.textContent = event.eventType ? labelEvent(event.eventType) : "--";
+    eventTypeCell.textContent = event.eventType || "--";
 
     const dateCell = document.createElement("td");
     dateCell.textContent = formatDate(
