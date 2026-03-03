@@ -3664,14 +3664,7 @@ const kpiType = document.getElementById("kpiType");
 const kpiPositions = document.getElementById("kpiPositions");
 const kpiBalance = document.getElementById("kpiBalance");
 const summaryBox = document.getElementById("summaryBox");
-const eventTable = document.getElementById("eventTable");
 const eventTableBody = document.getElementById("eventTableBody");
-const tableState = document.getElementById("tableState");
-const tableStateBadge = document.getElementById("tableStateBadge");
-const tableStateTitle = document.getElementById("tableStateTitle");
-const tableStateText = document.getElementById("tableStateText");
-const densityComfortableBtn = document.getElementById("densityComfortableBtn");
-const densityCompactBtn = document.getElementById("densityCompactBtn");
 const outputStatus = document.getElementById("outputStatus");
 
 const CASES = {
@@ -4222,56 +4215,6 @@ const formatDate = (value) => {
   return parts[0] || "--";
 };
 
-const setTableState = (state) => {
-  if (!tableState || !tableStateBadge || !tableStateTitle || !tableStateText) return;
-
-  if (state === "hidden") {
-    tableState.hidden = true;
-    if (eventTable) eventTable.hidden = false;
-    return;
-  }
-
-  const states = {
-    loading: {
-      badge: "Loading",
-      title: "Computing event timeline",
-      text: "Applying fiscal logic and rebuilding the table.",
-    },
-    empty: {
-      badge: "Empty",
-      title: "No rows to display",
-      text: "Load a case and compute to populate the event table.",
-    },
-    error: {
-      badge: "Error",
-      title: "Unable to render the table",
-      text: "Fix the input JSON and run compute again.",
-    },
-  };
-
-  const snapshot = states[state] || states.empty;
-  tableStateBadge.textContent = snapshot.badge;
-  tableStateTitle.textContent = snapshot.title;
-  tableStateText.textContent = snapshot.text;
-  tableState.dataset.state = state;
-  tableState.hidden = false;
-  if (eventTable) eventTable.hidden = true;
-};
-
-const setTableDensity = (density) => {
-  if (!eventTable) return;
-  const normalized = density === "compact" ? "compact" : "comfortable";
-  eventTable.dataset.density = normalized;
-
-  if (densityComfortableBtn) {
-    densityComfortableBtn.classList.toggle("is-active", normalized === "comfortable");
-  }
-
-  if (densityCompactBtn) {
-    densityCompactBtn.classList.toggle("is-active", normalized === "compact");
-  }
-};
-
 const getLatestState = (customerStates) => {
   if (!customerStates) return { year: null, state: null };
   const years = Object.keys(customerStates)
@@ -4298,7 +4241,6 @@ const showError = (message) => {
   outputStatus.textContent = "Error";
   outputStatus.style.background = "#f3f4f6";
   outputStatus.style.color = "#111827";
-  setTableState("error");
 };
 
 const clearError = () => {
@@ -4915,12 +4857,7 @@ const renderTable = (events, outputs) => {
   if (!eventTableBody) return;
   eventTableBody.innerHTML = "";
 
-  if (!outputs || outputs.length === 0) {
-    setTableState("empty");
-    return;
-  }
-
-  setTableState("hidden");
+  if (!outputs || outputs.length === 0) return;
 
   const columnCount = document.querySelectorAll(".event-table thead th").length || 1;
 
@@ -5161,7 +5098,6 @@ const compute = () => {
   outputStatus.textContent = "Computing...";
   outputStatus.style.background = "#f3f4f6";
   outputStatus.style.color = "#111827";
-  setTableState("loading");
 
   if (!currentCaseId || !CASES[currentCaseId]) {
     showError("Select a case before computing");
@@ -5217,18 +5153,6 @@ if (caseSearchInput) {
   });
 }
 
-if (densityComfortableBtn) {
-  densityComfortableBtn.addEventListener("click", () => {
-    setTableDensity("comfortable");
-  });
-}
-
-if (densityCompactBtn) {
-  densityCompactBtn.addEventListener("click", () => {
-    setTableDensity("compact");
-  });
-}
-
 document.getElementById("clearBtn").addEventListener("click", () => {
   inputEl.value = "";
   outputEl.textContent = `{
@@ -5243,13 +5167,10 @@ document.getElementById("clearBtn").addEventListener("click", () => {
   kpiPositions.textContent = "--";
   kpiBalance.textContent = "Balance --";
   clearError();
-  setTableState("empty");
 });
 
 document.getElementById("copyBtn").addEventListener("click", () => {
   navigator.clipboard.writeText(outputEl.textContent);
 });
 
-setTableDensity("comfortable");
-setTableState("empty");
 compute();

@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Scope Insights Dashboard</title>
-    <link rel="stylesheet" href="styles.css?v=20260303f" />
+    <link rel="stylesheet" href="styles.css?v=20260303g" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -92,20 +92,9 @@
         </div>
 
         <div class="data-table">
-          <div class="data-table-header">
-            <h4>Event table</h4>
-            <div class="density-toggle" role="group" aria-label="Table density">
-              <button id="densityComfortableBtn" class="density-btn is-active" type="button">Comfortable</button>
-              <button id="densityCompactBtn" class="density-btn" type="button">Compact</button>
-            </div>
-          </div>
+          <h4>Event table</h4>
           <div class="table-scroll">
-            <div id="tableState" class="table-state" hidden>
-              <p id="tableStateBadge" class="table-state-badge">Idle</p>
-              <p id="tableStateTitle" class="table-state-title">No events yet</p>
-              <p id="tableStateText" class="table-state-text">Load a case and compute to populate the table.</p>
-            </div>
-            <table id="eventTable" class="event-table" data-density="comfortable">
+            <table class="event-table">
               <thead>
                 <tr>
                   <th></th>
@@ -139,6 +128,6 @@
 }</pre>
     </section>
 
-    <script src="app.js?v=20260303f"></script>
+    <script src="app.js?v=20260303g"></script>
   </body>
 </html>
