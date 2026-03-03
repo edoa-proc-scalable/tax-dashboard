@@ -3351,7 +3351,12 @@ const SAMPLE_INPUT_CASE_721 = `{
     },
     {
       "triggerReference": "T3",
+      "isin": "IT0003132476",
       "eventType": "REVERSAL",
+      "quantity": 1000,
+      "unitPrice": 14.5,
+      "accountGroupId": "IT000052",
+      "fee": 0.0,
       "correctedTriggerReference": "T0",
       "transactionTimestamp": "2026-01-14T03:00:00+00:00",
       "valueDate": "2026-01-14"
@@ -3595,7 +3600,10 @@ const SAMPLE_INPUT_CASE_734 = `{
       "triggerReference": "2",
       "isin": "DE0005140008",
       "eventType": "DIST_SECU",
+      "quantity": 100,
+      "unitPrice": -0.3,
       "accountGroupId": "IT000074",
+      "fee": 0.0,
       "grossAmount": -30.0,
       "transactionTimestamp": "2025-03-15T03:00:00+00:00",
       "valueDate": "2025-03-15"
